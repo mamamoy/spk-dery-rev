@@ -31,7 +31,7 @@
                                 <div class="container">
                                     <ul>
                                         <li class="menu-item">
-                                            <a href="index.html" class='menu-link'>
+                                            <a href="{{route('index')}}" class='menu-link'>
 
                                                 <span class="fw-bold">Beranda</span>
                                             </a>
@@ -90,46 +90,55 @@
 
         <div class="content-wrapper container">
 
-            <div class="page-heading d-flex align-items-center">
-                <span class="fw-bold fs-4">{{ $title }}</span><span
-                    class="fw-bold ms-2">{{ $subtitle }}</span>
+            <div class="page-heading">
+                <div class="row justify-content-center">
+                    <div class="col-7">
+                        <span class="fw-bold fs-4">{{ $title }}</span>
+                    </div>
+                </div>
             </div>
             <div class="page-content">
-                <section class="row">
-                    <div class="col-12 col-lg-8">
-                        <div class="card">
-                            <div class="row">
-                                <div class="d-flex align-items-center justify-content-around">
-                                    <img src="{{ asset('dist/assets/images/samples/1.png') }}" class="mt-4 mb-4"
-                                        style="height: 330px"></img>
-
+                <section class="row justify-content-center" >
+                    <div class="col-7">
+                        <form action="" method="POST">
+                            @csrf
+                            <div class="card">
+                                <div class="card-header d-flex">
+                                    <div class="avatar avatar-lg bg-warning me-3">
+                                        <img src="assets/images/faces/1.jpg" alt="" srcset="">
+                                    </div>
+                                    <div class="mt-2">
+                                        <h5>{{$subtitle}}</h5>
+                                    </div>
+                                </div>
+                                <hr class="mb-0 mt-0">
+                                <div class="card-body d-flex justify-content-center mt-4 mb-4">
+                                    <div class="" style="width: 80%">
+                                        <div class="form-group mb-4">
+                                            <label for="name">Nama Lengkap</label>
+                                            <input type="text" class="form-control" name="name" id="name"
+                                                placeholder="Nama Lengkap">
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <label for="tempat">Tempat Lahir</label>
+                                            <input type="text" class="form-control" name="tempat" id="tempat"
+                                                placeholder="Tempat Lahir">
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <label for="username">Username</label>
+                                            <input type="text" class="form-control" name="username"
+                                                id="username" placeholder="Username">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="d-flex justify-content-center gap-5">
+                                <button class="btn btn-outline-success">Simpan</button>
+                                <button class="btn btn-outline-danger">Batal</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-12 col-lg-4">
 
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Selamat datang di SIPATUBA</h4>
-                            </div>
-                            <div class="card-body">
-                                {{-- content --}}
-                                <p>Sipatuba adalah aplikasi yang dibuat untuk diagnosa gangguan tumbuh kembang pada
-                                    balita.</p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Informasi Tumbuh Kembang</h4>
-                            </div>
-                            <div class="card-body">
-                                {{-- content --}}
-                                <p>Untuk melihat informasi tumbuh kembang pada balita, klik <a
-                                        href="{{ route('tumbuh-kembang.index') }}">link tautan dibawah ini.</a></p>
-                            </div>
-                        </div>
-                    </div>
                 </section>
             </div>
 

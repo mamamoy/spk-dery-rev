@@ -31,7 +31,7 @@
                                 <div class="container">
                                     <ul>
                                         <li class="menu-item">
-                                            <a href="index.html" class='menu-link'>
+                                            <a href="{{route('index')}}" class='menu-link'>
 
                                                 <span class="fw-bold">Beranda</span>
                                             </a>
@@ -90,46 +90,72 @@
 
         <div class="content-wrapper container">
 
-            <div class="page-heading d-flex align-items-center">
-                <span class="fw-bold fs-4">{{ $title }}</span><span
-                    class="fw-bold ms-2">{{ $subtitle }}</span>
+            <div class="page-heading">
+                <span class="fw-bold fs-4">{{ $title }}</span>
             </div>
             <div class="page-content">
                 <section class="row">
-                    <div class="col-12 col-lg-8">
-                        <div class="card">
-                            <div class="row">
-                                <div class="d-flex align-items-center justify-content-around">
-                                    <img src="{{ asset('dist/assets/images/samples/1.png') }}" class="mt-4 mb-4"
-                                        style="height: 330px"></img>
-
+                    <div class="col-12">
+                        <form action="" method="POST">
+                            @csrf
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row justify-content-around">
+                                        <div class="col-md-3">
+                                            <div class="form-group mb-4">
+                                                <label for="name">Nama Lengkap</label>
+                                                <input type="text" class="form-control" name="name" id="name"
+                                                    placeholder="Nama Lengkap">
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <label for="tempat">Tempat Lahir</label>
+                                                <input type="text" class="form-control" name="tempat" id="tempat"
+                                                    placeholder="Tempat Lahir">
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <label for="username">Username</label>
+                                                <input type="text" class="form-control" name="username"
+                                                    id="username" placeholder="Username">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group mb-4">
+                                                <label for="tanggal">Tanggal Lahir</label>
+                                                <input type="date" class="form-control" name="tanggal"
+                                                    id="tanggal">
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <label for="kelamin">Jenis Kelamin</label>
+                                                <select name="kelamin" id="kelamin" class="form-select">
+                                                    <option value="l">Laki-laki</option>
+                                                    <option value="p">Perempuan</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <label for="password">Password</label>
+                                                <input type="password" class="form-control" name="password"
+                                                    id="password" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="role">User</label>
+                                                <select name="role" id="role" class="form-select">
+                                                    <option value="0">Pasien</option>
+                                                    <option value="1">Admin</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="d-flex justify-content-center gap-5">
+                                <button class="btn btn-outline-success">Simpan</button>
+                                <button class="btn btn-outline-danger">Batal</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-12 col-lg-4">
 
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Selamat datang di SIPATUBA</h4>
-                            </div>
-                            <div class="card-body">
-                                {{-- content --}}
-                                <p>Sipatuba adalah aplikasi yang dibuat untuk diagnosa gangguan tumbuh kembang pada
-                                    balita.</p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Informasi Tumbuh Kembang</h4>
-                            </div>
-                            <div class="card-body">
-                                {{-- content --}}
-                                <p>Untuk melihat informasi tumbuh kembang pada balita, klik <a
-                                        href="{{ route('tumbuh-kembang.index') }}">link tautan dibawah ini.</a></p>
-                            </div>
-                        </div>
-                    </div>
                 </section>
             </div>
 

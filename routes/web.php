@@ -7,6 +7,8 @@ use App\Http\Controllers\TKController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,9 @@ use App\Http\Controllers\HomeController;
 
 
 Route::resource('/', HomeController::class);
+Route::resource('/daftar', RegisterController::class);
+Route::resource('/masuk', LoginController::class);
+
 Route::resource('relasi', RelasiController::class);
 Route::resource('gejala', GejalaController::class);
 Route::resource('tumbuh-kembang', TKController::class);
