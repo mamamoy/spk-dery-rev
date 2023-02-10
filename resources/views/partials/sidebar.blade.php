@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="/keluar" class='sidebar-link'>
                         <i class="fa-fw select-all fas"></i>
                         <span>Keluar</span>
                     </a>

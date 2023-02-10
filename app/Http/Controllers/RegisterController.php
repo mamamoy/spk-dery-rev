@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -38,7 +40,22 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'tempat' => 'required',
+            'username' => 'required|min:5',
+            'tanggal' => 'required',
+            'kelamin' => 'required',
+            'password' => 'required|min:5',
+            'role' => 'required'
+        ]);
+
+        $validatedData['password'] = bcrypt($validatedData['password']);
+
+        User::create($validatedData);
+        $request->session()->flash('success', 'Registrasi berhasil! silahkan login');
+        return redirect('/masuk');
     }
 
     /**

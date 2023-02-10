@@ -24,8 +24,14 @@ use App\Http\Controllers\LoginController;
 
 
 Route::resource('/', HomeController::class);
-Route::resource('/daftar', RegisterController::class);
-Route::resource('/masuk', LoginController::class);
+Route::resource('daftar', RegisterController::class);
+Route::post('daftar', [RegisterController::class, 'store']);
+
+Route::resource('masuk', LoginController::class);
+Route::post('masuk', [LoginController::class, 'authenticate']);
+
+Route::get('keluar', [LoginController::class, 'logout']);
+
 
 Route::resource('relasi', RelasiController::class);
 Route::resource('gejala', GejalaController::class);

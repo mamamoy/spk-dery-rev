@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class LoginController extends Controller
 {
@@ -36,9 +39,33 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function authenticate(Request $request)
     {
-        //
+        $credentials = $request->validate([
+            'username' => ['required'],
+            'password' => ['required'],
+            'role' => ['required']
+        ]);
+
+        // $credentials['password'] = Hash::make($credentials['password']);
+        if (Auth::attempt($credentials)) {
+
+            $request->session()->regenerate();
+
+            return redirect()->intended('relasi');
+        }
+
+        return back()->with('loginError', 'Login failed!');
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 
     /**
