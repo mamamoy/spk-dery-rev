@@ -6,7 +6,6 @@ use App\Models\Diagnosa;
 use App\Models\Gejala;
 use App\Models\Relasi;
 use App\Models\TKModel;
-
 use Illuminate\Http\Request;
 
 

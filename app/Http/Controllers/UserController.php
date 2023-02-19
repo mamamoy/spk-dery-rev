@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Gejala;
-use App\Models\TKModel;
-use App\Models\Relasi;
-use App\Models\Diagnosa;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class DashboardController extends Controller
+class UserController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -18,24 +17,13 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
-        
-        $gejala = Gejala::all();
-        $penyakit = TKModel::all();
-        $user = User::all();
-
-        $used_ids = Relasi::pluck('penyakit_id')->toArray();
-        $penyakits = TKModel::whereIn('id', $used_ids)->get();
-        
         $data = [
-            'title' => 'Dashboard',
-            'subtitle' => 'Statistik',
-            'gejala' => count($gejala),
-            'penyakit' => count($penyakit),
-            'relasi' => count($penyakits),
-            'user' => count($user),
+            'title' => 'User List',
+            'subtitle' => '',
+            'user' => User::all(),
         ];
-        return view('auth.dashboard', $data);
+
+        return view('user.index', $data);
     }
 
     /**
@@ -78,7 +66,15 @@ class DashboardController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::all()->find($id);
+
+        $data = [
+            'title' => 'Edit User',
+            'subtitle' => 'Data User',
+            'user' => $user,
+        ];
+
+        return view('user.edit', $data);
     }
 
     /**
@@ -88,9 +84,32 @@ class DashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+            'kode' => 'required|string',
+            'nama_user' => 'required|string',
+        ]);
+
+        $user = User::all()->where('id', $request->id);
+
+
+        $user->first()->update([
+            'kode' => $request->kode,
+            'nama_user' => $request->nama_user,
+            'definisi' => $request->definisi,
+            'solusi' => $request->solusi,
+        ]);
+
+
+        if ($user) {
+            //redirect dengan pesan sukses
+
+            return redirect()->route('tumbuh-kembang.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('tumbuh-kembang.edit')->with(['error' => 'Data Gagal Disimpan!']);
+        }
     }
 
     /**

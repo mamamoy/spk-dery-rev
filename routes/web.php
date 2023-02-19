@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +33,12 @@ Route::post('masuk', [LoginController::class, 'authenticate']);
 
 Route::get('keluar', [LoginController::class, 'logout']);
 
-
-Route::resource('relasi', RelasiController::class);
-Route::resource('gejala', GejalaController::class);
-Route::resource('tumbuh-kembang', TKController::class);
-Route::resource('diagnosa', DiagnosaController::class);
-Route::match(['get', 'post'], 'diagnosa/hasil', [DiagnosaController::class, 'hasil'])->name('diagnosa.hasil');
+Route::group(['middleware' => ['add.user.data']], function () {
+    Route::resource('/dashboard', DashboardController::class)->middleware('auth');
+    Route::resource('relasi', RelasiController::class);
+    Route::resource('gejala', GejalaController::class);
+    Route::resource('tumbuh-kembang', TKController::class);
+    Route::resource('diagnosa', DiagnosaController::class);
+    Route::resource('user-list', UserController::class)->middleware('admin');
+    Route::match(['get', 'post'], 'diagnosa/hasil', [DiagnosaController::class, 'hasil'])->name('diagnosa.hasil');
+});

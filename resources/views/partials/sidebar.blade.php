@@ -9,8 +9,12 @@
                             </div>
                         </div>
                         <div class="user-name mt-2">
-                            <h6 class="mb-0 text-gray-600">John Ducky</h6>
-                            <p class="mb-0 text-sm text-gray-600">Administrator</p>
+                            <h6 class="mb-0 text-gray-600 name">{{request()->get('name')}}</h6>
+                            <p class="mb-0 text-sm text-gray-600 role">@if(request()->get('role') == 1)
+                                Admin
+                            @else
+                                Pasien
+                            @endif</p>
                         </div>
                     </div>
                 <div class="sidebar-toggler  x">
@@ -23,7 +27,7 @@
                 <li class="sidebar-title">Menu</li>
 
                 <li class="sidebar-item  ">
-                    <a href="/" class='sidebar-link'>
+                    <a href="{{route('dashboard.index')}}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
@@ -56,7 +60,7 @@
                 <li class="sidebar-title">Pengaturan</li>
 
                 <li class="sidebar-item  ">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{route('user-list.index')}}" class='sidebar-link'>
                         <i class="fa-fw select-all fas"></i>
                         <span>User</span>
                     </a>

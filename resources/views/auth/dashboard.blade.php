@@ -76,8 +76,15 @@
                         </div>
                         <div class="card-body">
                             {{-- content --}}
-                            <canvas id="bar" style="display: block; width: 337px; height: 168px;"
-                                class="chartjs-render-monitor" width="337" height="168"></canvas>
+                            <div class="row">
+                                <div class="d-flex align-items-center justify-content-around">
+                                    <img src="{{ asset('dist/assets/images/samples/4.png') }}" class="col-lg-6 col-md-6 col-6"></img>
+                                    <div class="col-lg-4 col-md-4 col-4 text-center">
+                                        <div class="value" akhi="{{ $user }}">0</div>
+                                        <h5>Pengguna</h5>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
