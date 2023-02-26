@@ -14,14 +14,14 @@
 
 @section('content')
     <div class="page-heading">
-        @if(session('role') == 1)
+        @if(Auth()->user()->role == 1)
         <h3>Profile Statistics</h3>
-        @elseif(session('role') == 0)
+        @elseif(Auth()->user()->role == 0)
         <h3>Dashboard</h3>
         @endif
     </div>
     <div class="page-content">
-        @if(session('role') == 1)
+        @if(Auth()->user()->role == 1)
         <section class="section">
             <div class="row">
                 <div class="col-md-6">
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </section>
-        @elseif(session('role') == 0)
+        @elseif(Auth()->user()->role == 0)
         <section class="section">
             <div class="card">
                 <div class="card-body">

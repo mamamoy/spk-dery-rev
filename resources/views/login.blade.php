@@ -58,7 +58,9 @@
                                                 </div>
                                             @enderror
                                     </div>
-                                    <div class="form-group">
+                                    <input type="hidden" name="role" id="role" value="0">
+
+                                    {{-- <div class="form-group">
                                         <label for="role">User</label>
                                         <select name="role" id="role" class="form-select">
                                             <option value="0">Pasien</option>
@@ -69,7 +71,7 @@
                                                 {{ $message }}
                                             </div>
                                         @enderror 
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

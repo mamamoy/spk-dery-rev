@@ -44,7 +44,7 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'tempat' => 'required',
-            'username' => 'required|min:5',
+            'username' => 'required|min:5|unique:users',
             'tanggal' => 'required',
             'kelamin' => 'required',
             'password' => 'required|min:5',

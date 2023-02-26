@@ -97,7 +97,7 @@ class DiagnosaController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // dd($request);
         $id = implode(',', $request->penyakit_id);
         $diagnosa = Diagnosa::create([
             'nama_pasien' => $request->nama_pasien,
@@ -107,14 +107,61 @@ class DiagnosaController extends Controller
 
         // dd($diagnosa);
 
-if ($diagnosa) {
-    //redirect dengan pesan sukses
-    return redirect()->route('dashboard.index')->with(['success' => 'Data Berhasil Disimpan!']);
-} else {
-    //redirect dengan pesan error
-    return redirect()->route('diagnosa.index')->with(['error' => 'Data Gagal Disimpan!']);
-}
+    if ($diagnosa) {
+        //redirect dengan pesan sukses
+        return redirect()->route('dashboard.index')->with(['success' => 'Data Berhasil Disimpan!']);
+    } else {
+        //redirect dengan pesan error
+        return redirect()->route('diagnosa.index')->with(['error' => 'Data Gagal Disimpan!']);
+    }
 // dd($hasil);
+    }
+
+    public function showDiagnosa()
+    {
+        dd('wdwwwd');
+        $used_ids = Relasi::pluck('penyakit_id')->toArray();
+        $penyakits = TKModel::whereIn('id', $used_ids)->get();
+        
+        $username = Auth::user()->username;
+        if (Auth()->user()->role == 0) {
+            $diagnosa = Diagnosa::where('username', $username)->get();
+        } else {
+            $diagnosa = Diagnosa::get();
+        }
+
+        if (empty($diagnosa)) {
+            $diagnosa = [];
+        }
+        $penyakitData = null;
+        foreach ($diagnosa as $key => $d) {
+            $penyakitData = TKModel::where('id', $d->penyakit_id)->value('nama_penyakit');
+        }
+
+        // dd($penyakitData);
+
+
+
+        if (Auth()->user()->role == 1) 
+        {
+            $data = [
+                'title' => 'History Diagnosa',
+                'subtitle' => 'Daftar Diagnosa',
+                'diagnosa' => $diagnosa,
+                'penyakitData' => $penyakitData,
+            ];
+        } elseif (Auth()->user()->role == 0) {
+            $data = [
+                'title' => 'History Diagnosa',
+                'subtitle' => 'Daftar Diagnosa',
+                'diagnosa' => $diagnosa,
+                'penyakitData' => $penyakitData,
+            ];
+        }
+
+
+        // dd($data);
+        return view('diagnosa.showDiagnosa', $data);
     }
 
     /**
@@ -123,9 +170,9 @@ if ($diagnosa) {
      * @param  \App\Models\Diagnosa  $diagnosa
      * @return \Illuminate\Http\Response
      */
-    public function show(Diagnosa $diagnosa)
+    public function show()
     {
-        //
+       
     }
 
     /**

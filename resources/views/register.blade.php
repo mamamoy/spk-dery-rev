@@ -13,7 +13,7 @@
                             @csrf
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="row justify-content-around">
+                                    <div class="row justify-content-center">
                                         <div class="col-md-3">
                                             <div class="form-group mb-4">
                                                 <label for="name">Nama Lengkap</label>
@@ -80,7 +80,8 @@
                                                     @enderror 
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <input type="hidden" name="role" id="role" value="0">
+                                        {{-- <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="role">User</label>
                                                 <select name="role" id="role" class="form-select">
@@ -92,7 +93,7 @@
                                                     </div>
                                                 @enderror 
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

@@ -42,8 +42,7 @@ class DashboardController extends Controller
         // dd($penyakitData);
 
         
-        
-        if(session('role') == 1){
+        if(Auth()->user()->role == 1){
             $data = [
                 'title' => 'Dashboard',
                 'subtitle' => 'Statistik',
@@ -53,7 +52,7 @@ class DashboardController extends Controller
                 'user' => count($user),
             ];
         }
-        elseif(session('role') == 1){
+        elseif(Auth()->user()->role == 0){
             $data = [
                 'title' => 'Dashboard',
                 'subtitle' => 'Daftar Diagnosa',

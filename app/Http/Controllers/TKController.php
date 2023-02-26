@@ -69,10 +69,10 @@ class TKController extends Controller
 
         if ($penyakit) {
             //redirect dengan pesan sukses
-            return redirect()->route('penyakit.index')->with(['success' => 'Data Berhasil Disimpan!']);
+            return redirect()->route('tumbuh-kembang.index')->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('penyakit.create')->with(['error' => 'Data Gagal Disimpan!']);
+            return redirect()->route('tumbuh-kembang.create')->with(['error' => 'Data Gagal Disimpan!']);
         }
     }
 
@@ -147,12 +147,12 @@ class TKController extends Controller
      * @param  \App\Models\TKModel  $tKModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TKModel $tKModel)
+    public function destroy(TKModel $tKModel,$id)
     {
         $penyakit = TKModel::find($id);
 
         $penyakit->delete();
 
-        return redirect()->route('TKModel.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('tumbuh-kembang.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

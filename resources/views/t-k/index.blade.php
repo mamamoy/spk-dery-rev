@@ -124,7 +124,7 @@
                         <tbody>
                             @foreach ($isi as $item)
                                 <tr>
-                                    <td class="text-center">{{ $item->id }}</td>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
                                     <td class="text-center">{{ $item->kode}}</td>
                                     <td class="text-center">{{ $item->definisi }}</td>
                                     <td class="text-center">{{ $item->solusi }}</td>

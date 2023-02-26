@@ -52,6 +52,22 @@
                                     </td>
                                     
                                     <td class="d-flex justify-content-around">
+                                        @if(Auth()->user()->id == $u->id)
+                                        <dl class="dt ma0 pa0 text-center">
+                                            <dt class="the-icon">
+                                               
+                                            </dt>
+                                            <dd class="mt-2 text-sm select-all word-wrap dtc v-top tl f2 icon-name">
+                                            </dd>
+                                        </dl>
+                                        <dl class="dt ma0 pa0 text-center">
+                                            <dt class="the-icon">
+                                              
+                                            </dt>
+                                            <dd class="mt-2 text-sm select-all word-wrap dtc v-top tl f2 icon-name">
+                                            </dd>
+                                        </dl>
+                                        @else
                                         <dl class="dt ma0 pa0 text-center">
                                             <dt class="the-icon">
                                                 <a href="/user-list/{{ $u->id }}/edit" class="btn btn-sm">
@@ -80,6 +96,7 @@
                                             <dd class="mt-2 text-sm select-all word-wrap dtc v-top tl f2 icon-name">Hapus
                                             </dd>
                                         </dl>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

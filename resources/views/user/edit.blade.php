@@ -96,21 +96,26 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="role" class="col-sm-5 col-form-label">Role</label>
-                                            <select name="role" id="role" class="form-select">
-                                                <option value="0" {{ $user->role == 0 ? 'selected' : '' }}>Pasien</option>
-                                                <option value="1" {{ $user->role == 1 ? 'selected' : '' }}>Admin</option>
+                                            <label for="password" class="col-sm-5 col-form-label">Password</label>
+                                            <input type="text" class="form-control" id="password" name="password"
+                                            placeholder="password" value="" >
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="isrole" class="  col-sm-5 col-form-label">Role</label>
+                                            <select name="is_role" id="">
+                                                <option class="form-control" value="0" {{ $user->role == 0 ? 'selected' : ''}}>Pasien</option>
+                                                <option class="form-control" value="1" {{ $user->role == 1 ? 'selected' : ''}}>Admin</option>
                                             </select>
-                                        @error('tanggal')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                        
                                         </div>
                                     </div>
                                     <input type="hidden" name="id" id="id" value="{{ $user->id }}">
                                     
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Update</button>
                                     </div>
                                 </div>
                             </form>
@@ -122,3 +127,27 @@
     </section>
 </div>
 @endsection
+
+@push('scripts')
+<script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js "></script>
+@if (session()->has('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: 'Data anda berhasil disimpan',
+      })
+</script>
+@endif
+@if (session()->has('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Gagal',
+        text: 'Data anda gagal disimpan',
+      })
+</script>
+@endif
+
+
+@endpush

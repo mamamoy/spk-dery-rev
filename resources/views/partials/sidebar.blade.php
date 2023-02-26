@@ -41,6 +41,12 @@
                             </a>
                         </li>
                         <li class="sidebar-item  ">
+                            <a href="{{route('diagnosa.showDiagnosa')}}" class='sidebar-link'>
+                                <i class="fa-fw select-all fas"></i>
+                                <span>History Diagnosa</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
                             <a href="{{route('tumbuh-kembang.index')}}" class='sidebar-link'>
                                 <i class="fa-fw select-all fas"></i>
                                 <span>Tumbuh Kembang</span>
@@ -84,6 +90,12 @@
                             <a href="{{route('diagnosa.index')}}" class='sidebar-link'>
                                 <i class="fa-fw select-all fas"></i>
                                 <span>Diagnosa</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="{{route('diagnosa.showDiagnosa')}}" class='sidebar-link'>
+                                <i class="fa-fw select-all fas"></i>
+                                <span>History Diagnosa </span>
                             </a>
                         </li>
                         <li class="sidebar-title">Pengaturan</li>

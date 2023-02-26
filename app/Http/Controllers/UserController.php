@@ -86,33 +86,47 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $this->validate($request, [
-            'name' => 'required|string',
-            'username' => 'required|string',
-            'tempat' => 'required|string',
-            'tanggal' => 'required',
-            'kelamin' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'tempat' => 'required',
+        //     'username' => 'required',
+        //     'tanggal' => 'required',
+        //     'kelamin' => 'required',
+        //     'role' => 'required'
+        // ]);
 
-        $user = User::all()->where('id', $request->id);
+        $user = User::all()->where('id', $request->id)->first();
 
+        // $user->first()->update([
+        //     'name' => $request->kode,
+        //     'tempat' => $request->nama_user,
+        //     'username' => $request->definisi,
+        //     'tanggal' => $request->solusi,
+        //     'kelamin' => $request->solusi,
+        //     'password' => $request->solusi,
+        //     'role' => $request->solusi,
 
-        $user->first()->update([
-            'name' => $request->name,
-            'username' => $request->username,
-            'rempat' => $request->rempat,
-            'tanggal' => $request->tanggal,
-            'kelamin' => $request->kelamin,
-        ]);
+        // ]);
 
+        $user['name']= $request->name;
+        $user['tempat'] = $request->tempat;
+        $user['username'] = $request->username;
+        $user['tanggal'] = $request->tanggal;
+        $user['kelamin'] = $request->kelamin;
+        if(isset($request->password)){
+
+            $user['password'] = bcrypt($request->password);
+        }
+        $user['role'] = $request->is_role;
+        $user->update();
 
         if ($user) {
             //redirect dengan pesan sukses
 
-            return redirect()->route('user-list.index')->with(['success' => 'Data Berhasil Disimpan!']);
+            return redirect()->back()->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('user-list.edit')->with(['error' => 'Data Gagal Disimpan!']);
+            return redirect()->back()->with(['error' => 'Data Gagal Disimpan!']);
         }
     }
 
@@ -124,6 +138,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $user = User::all()->where('id', $id)->first();
+
+        $user->delete();
+        if ($user) {
+            //redirect dengan pesan sukses
+
+            return redirect()->back()->with(['success' => 'Data Berhasil Dihapus!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->back()->with(['error' => 'Data Gagal Dihapus!']);
+        }
     }
 }

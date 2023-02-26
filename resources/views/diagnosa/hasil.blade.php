@@ -37,7 +37,7 @@
                         </div>
                         <input type="text" name="nama_pasien" id="nama_pasien" value="{{ $pasien }}" hidden>
                         @foreach ($hasil as $item)
-                            <input type="text" name="penyakit_id[]" id="penyakit_id" value="{{ $item[0]->id }}">
+                            <input type="hidden" name="penyakit_id[]" id="penyakit_id" value="{{ $item[0]->id }}">
                         @endforeach
                         <table class="table table-bordered">
                             <thead>
