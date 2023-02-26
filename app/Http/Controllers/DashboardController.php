@@ -34,23 +34,34 @@ class DashboardController extends Controller
         if(empty($diagnosa)){
             $diagnosa = [];
         }
-        
+        $penyakitData = null;
         foreach ($diagnosa as $key => $d) {
-            $penyakitData = TKModel::where('id', $d->penyakit_id)->first();
+            $penyakitData = TKModel::where('id', $d->penyakit_id)->value('nama_penyakit');
         }
 
         // dd($penyakitData);
+
         
-        $data = [
-            'title' => 'Dashboard',
-            'subtitle' => 'Statistik',
-            'gejala' => count($gejala),
-            'penyakit' => count($penyakit),
-            'relasi' => count($penyakits),
-            'user' => count($user),
-            'diagnosa' => $diagnosa,
-            'penyakitData' => $penyakitData->nama_penyakit,
-        ];
+        
+        if(session('role') == 1){
+            $data = [
+                'title' => 'Dashboard',
+                'subtitle' => 'Statistik',
+                'gejala' => count($gejala),
+                'penyakit' => count($penyakit),
+                'relasi' => count($penyakits),
+                'user' => count($user),
+            ];
+        }
+        elseif(session('role') == 1){
+            $data = [
+                'title' => 'Dashboard',
+                'subtitle' => 'Daftar Diagnosa',
+                'diagnosa' => $diagnosa,
+                'penyakitData' => $penyakitData,
+            ];
+        }
+        
 
         // dd($data);
         return view('auth.dashboard', $data);
