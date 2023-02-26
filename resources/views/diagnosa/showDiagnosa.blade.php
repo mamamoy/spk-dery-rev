@@ -36,7 +36,7 @@
                             <tbody>
                                 @foreach ($diagnosa as $item)
                                     <tr>
-                                        <td class="text-center">{{ $item->id }}</td>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
                                         <td class="text-center">{{ $item->created_at }}</td>
                                         <td class="text-center">{{ $item->nama_pasien }}</td>
                                         <td class="text-center">{{ $penyakitData }}</td>
