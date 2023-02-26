@@ -52,7 +52,10 @@ class LoginController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect()->intended('relasi');
+            $role = $credentials['role'];
+            $request->session()->put('role', $role);
+
+            return redirect()->intended('dashboard');
         }
 
         return back()->with('loginError', 'Login failed!');

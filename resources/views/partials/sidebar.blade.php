@@ -26,51 +26,76 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item  ">
-                    <a href="{{route('dashboard.index')}}" class='sidebar-link'>
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="sidebar-item  ">
-                    <a href="{{route('diagnosa.index')}}" class='sidebar-link'>
-                        <i class="fa-fw select-all fas"></i>
-                        <span>Diagnosa</span>
-                    </a>
-                </li>
-                <li class="sidebar-item  ">
-                    <a href="{{route('tumbuh-kembang.index')}}" class='sidebar-link'>
-                        <i class="fa-fw select-all fas"></i>
-                        <span>Tumbuh Kembang</span>
-                    </a>
-                </li>
-                <li class="sidebar-item  ">
-                    <a href="{{route('gejala.index')}}" class='sidebar-link'>
-                        <i class="fa-fw select-all fas"></i>
-                        <span>Gejala</span>
-                    </a>
-                </li>
-                <li class="sidebar-item  ">
-                    <a href="{{route('relasi.index')}}" class='sidebar-link'>
-                        <i class="fa-fw select-all fas"></i>
-                        <span>Basis Pengetahuan</span>
-                    </a>
-                </li>
+                @auth
+                    @if(Auth::user()->role == 1)
+                        <li class="sidebar-item  ">
+                            <a href="{{route('dashboard.index')}}" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="{{route('diagnosa.index')}}" class='sidebar-link'>
+                                <i class="fa-fw select-all fas"></i>
+                                <span>Diagnosa</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="{{route('tumbuh-kembang.index')}}" class='sidebar-link'>
+                                <i class="fa-fw select-all fas"></i>
+                                <span>Tumbuh Kembang</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="{{route('gejala.index')}}" class='sidebar-link'>
+                                <i class="fa-fw select-all fas"></i>
+                                <span>Gejala</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="{{route('relasi.index')}}" class='sidebar-link'>
+                                <i class="fa-fw select-all fas"></i>
+                                <span>Basis Pengetahuan</span>
+                            </a>
+                        </li>
+        
+                        <li class="sidebar-title">Pengaturan</li>
+        
+                        <li class="sidebar-item  ">
+                            <a href="{{route('user-list.index')}}" class='sidebar-link'>
+                                <i class="fa-fw select-all fas"></i>
+                                <span>User</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="/keluar" class='sidebar-link'>
+                                <i class="fa-fw select-all fas"></i>
+                                <span>Keluar</span>
+                            </a>
+                        </li>
+                    @else()
+                        <li class="sidebar-item  ">
+                            <a href="{{route('dashboard.index')}}" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="{{route('diagnosa.index')}}" class='sidebar-link'>
+                                <i class="fa-fw select-all fas"></i>
+                                <span>Diagnosa</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-title">Pengaturan</li>
+                        <li class="sidebar-item  ">
+                            <a href="/keluar" class='sidebar-link'>
+                                <i class="fa-fw select-all fas"></i>
+                                <span>Keluar</span>
+                            </a>
+                        </li>
+                    @endcan
+                @endauth
 
-                <li class="sidebar-title">Pengaturan</li>
-
-                <li class="sidebar-item  ">
-                    <a href="{{route('user-list.index')}}" class='sidebar-link'>
-                        <i class="fa-fw select-all fas"></i>
-                        <span>User</span>
-                    </a>
-                </li>
-                <li class="sidebar-item  ">
-                    <a href="/keluar" class='sidebar-link'>
-                        <i class="fa-fw select-all fas"></i>
-                        <span>Keluar</span>
-                    </a>
-                </li>
 
             </ul>
         </div>

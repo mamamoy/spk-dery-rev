@@ -134,18 +134,16 @@ $data=[
      */
     public function edit($id)
     {
-        $relasiID = Relasi::all()->find($id);
+    // mengambil data relasi berdasarkan penyakit_id
+    $relasi = Relasi::find($id);
+        $relasiID = Relasi::all();
     // mengambil data penyakit berdasarkan id
-    $penyakit = TKModel::find($id);
+    $penyakit = TKModel::find($relasi->penyakit_id);
     // mengambil seluruh data gejala
     $gejala = Gejala::all();
-    // mengambil data relasi berdasarkan penyakit_id
-    $relasi = Relasi::where('penyakit_id', $id)->get();
     // menampung id gejala yang terpilih
-    $hasil = array();
-    foreach ($relasi as $r) {
-        array_push($hasil, $r->gejala_id);
-    }
+    $r = Relasi::where('penyakit_id', $penyakit->id)->first();
+    $hasil = $r ? $r->pluck('id')->toArray() : [];
 
     $data = [
         'title' => 'Edit Basis Pengetahuan',
@@ -154,12 +152,13 @@ $data=[
         'gejala' => $gejala,
         'relasi' => $relasi,
         'hasil' => $hasil,
-        'id' => $relasiID,
+        'id' => $id,
         'all' => TKModel::all(),
     ];
 
     // dd($data);
     return view('relasi.edit', $data);
+
     }
 
     /**

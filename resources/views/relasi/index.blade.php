@@ -112,7 +112,7 @@
                                         {{ rtrim(implode(', ', $d['gejala']), ',') }}
                                     </td>
                                     <td>
-                                        {{-- <dl class="dt ma0 pa0 text-center">
+                                        <dl class="dt ma0 pa0 text-center">
                                             <dt class="the-icon">
                                                 <a href="/relasi/{{ $d['id'] }}/edit" class="btn btn-sm">
                                                     <span class="fa-fw select-all fas"></span>
@@ -120,7 +120,7 @@
                                             </dt>
                                             <dd class="mt-2 text-sm select-all word-wrap dtc v-top tl f2 icon-name">Edit
                                             </dd>
-                                        </dl> --}}
+                                        </dl>
                                         <dl class="dt ma0 pa0 text-center">
                                             <dt class="the-icon">
                                                 <form method="POST" action="{{ route('relasi.destroy', $d['id']) }}">

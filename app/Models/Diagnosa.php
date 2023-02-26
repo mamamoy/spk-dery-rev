@@ -9,7 +9,7 @@ class Diagnosa extends Model
 {
     use HasFactory;
     protected $table = 'konsuls';
-    protected $fillable =['penyakit_id', 'nama_pasien'];
+    protected $fillable =['penyakit_id', 'nama_pasien', 'username'];
 
     public function dataPenyakit()
     {

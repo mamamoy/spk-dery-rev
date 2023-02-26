@@ -84,8 +84,7 @@
                                             <div class="form-group">
                                                 <label for="role">User</label>
                                                 <select name="role" id="role" class="form-select">
-                                                    <option value="0">Pasien</option>
-                                                    <option value="1">Admin</option>
+                                                    <option value="0" selected>Pasien</option>
                                                 </select>
                                                 @error('role')
                                                     <div class="text-danger">

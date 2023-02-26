@@ -8,6 +8,7 @@ use App\Models\TKModel;
 use App\Models\Relasi;
 use App\Models\Diagnosa;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -26,6 +27,19 @@ class DashboardController extends Controller
 
         $used_ids = Relasi::pluck('penyakit_id')->toArray();
         $penyakits = TKModel::whereIn('id', $used_ids)->get();
+
+        $username = Auth::user()->username;
+        $diagnosa = Diagnosa::where('username', $username)->get();
+
+        if(empty($diagnosa)){
+            $diagnosa = [];
+        }
+        
+        foreach ($diagnosa as $key => $d) {
+            $penyakitData = TKModel::where('id', $d->penyakit_id)->first();
+        }
+
+        // dd($penyakitData);
         
         $data = [
             'title' => 'Dashboard',
@@ -34,7 +48,11 @@ class DashboardController extends Controller
             'penyakit' => count($penyakit),
             'relasi' => count($penyakits),
             'user' => count($user),
+            'diagnosa' => $diagnosa,
+            'penyakitData' => $penyakitData->nama_penyakit,
         ];
+
+        // dd($data);
         return view('auth.dashboard', $data);
     }
 

@@ -7,6 +7,7 @@ use App\Models\Gejala;
 use App\Models\Relasi;
 use App\Models\TKModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class DiagnosaController extends Controller
@@ -70,8 +71,6 @@ class DiagnosaController extends Controller
             $cek[] = TKModel::where('id', $value)->get();
         }
 
-        // dd($hasil);
-        // dd($cek);
 
         $data = [
             'title' => 'Hasil Diagnosa',
@@ -103,13 +102,14 @@ class DiagnosaController extends Controller
         $diagnosa = Diagnosa::create([
             'nama_pasien' => $request->nama_pasien,
             'penyakit_id' => $id,
+            'username' => Auth::user()->username,
         ]);
 
         // dd($diagnosa);
 
 if ($diagnosa) {
     //redirect dengan pesan sukses
-    return redirect()->route('index')->with(['success' => 'Data Berhasil Disimpan!']);
+    return redirect()->route('dashboard.index')->with(['success' => 'Data Berhasil Disimpan!']);
 } else {
     //redirect dengan pesan error
     return redirect()->route('diagnosa.index')->with(['error' => 'Data Gagal Disimpan!']);

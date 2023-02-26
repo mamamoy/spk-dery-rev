@@ -56,18 +56,13 @@
 
                                                     <ul class="submenu-group">
                                                         <li class="submenu-item  ">
-                                                            <a href="component-carousel.html"
-                                                                class='submenu-link'>Carousel</a>
+                                                            <a href="/daftar-gejala"
+                                                                class='submenu-link'>Gejala</a>
                                                         </li>
 
                                                         <li class="submenu-item  ">
-                                                            <a href="component-collapse.html"
-                                                                class='submenu-link'>Collapse</a>
-                                                        </li>
-
-                                                        <li class="submenu-item  ">
-                                                            <a href="component-dropdown.html"
-                                                                class='submenu-link'>Dropdown</a>
+                                                            <a href="/daftar-penyakit"
+                                                                class='submenu-link'>Penyakit</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -107,7 +102,9 @@
                 </div>
             </header>
         </div>
+        <div id="app">
         @yield('content')
+        </div>
         <footer>
             <div class="container">
                 <div class="footer clearfix mb-0 text-muted">

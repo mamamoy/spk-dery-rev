@@ -21,6 +21,20 @@ class TKController extends Controller
         ];
         return view('t-k.index', $data);
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function daftar()
+    {
+        $data = [
+            'title' => 'Daftar Tumbuh Kembang',
+            'subtitle' => 'Halaman yang berisikan daftar data tumbuh kembang yang tersimpan',
+            'isi' => TKModel::all(),
+        ];
+        return view('daftarPenyakit', $data);
+    }
 
     /**
      * Show the form for creating a new resource.

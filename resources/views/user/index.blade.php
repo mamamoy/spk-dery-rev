@@ -30,8 +30,9 @@
                             <tr>
                                 <th class="text-center">No</th>
                                 <th class="text-center">Nama</th>
-                                <th class="text-center">Username</th>
-                                <th class="text-center">Role</th>
+                                <th class="text-center">Tempat Lahir</th>
+                                <th class="text-center">Tanggal Lahir</th>
+                                <th class="text-center">Jenis Kelamin</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -40,14 +41,16 @@
                                 <tr>
                                     <td class="text-center">{{ $key+1 }}</td>
                                     <td class="text-center">{{ $u['name']}}</td>
-                                    <td class="text-center">{{ $u['username'] }}</td>
+                                    <td class="text-center">{{ $u['tempat'] }}</td>
+                                    <td class="text-center">{{ $u['tanggal'] }}</td>
                                     <td class="text-center">
-                                        @if( $u['role'] == 1)
-                                        Admin
-                                        @else
-                                            Pasien
+                                        @if( $u['kelamin'] == "l")
+                                            Laki-laki
+                                        @else()
+                                            Perempuan
                                         @endif
                                     </td>
+                                    
                                     <td class="d-flex justify-content-around">
                                         <dl class="dt ma0 pa0 text-center">
                                             <dt class="the-icon">

@@ -22,35 +22,7 @@
                 </div>
             </div>
         </div>
-        {{-- <section class="tasks">
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="card widget-todo">
-                        <div class="card-header border-bottom d-flex justify-content-between align-items-center">
-                            <h4 class="card-title d-flex">
-                                <i class="bx bx-check font-medium-5 pl-25 pr-75"></i>Tasks
-                            </h4>
-                        </div>
-                        <div class="card-body px-0 py-1">
-                            <ul class="widget-todo-list-wrapper" id="widget-todo-list">
-                                <li class="widget-todo-item">
-                                    <div class="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-50">
-                                        <div class="widget-todo-title-area d-flex align-items-center">
-                                            <div class="checkbox checkbox-shadow">
-                                                <input type="checkbox" class="form-check-input" id="checkbox1">
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                            <span class="widget-todo-title ml-50">Add SCSS and JS files if
-                                                required</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
+        
         <section class="section">
             <div class="card">
                 <div class="card-body">

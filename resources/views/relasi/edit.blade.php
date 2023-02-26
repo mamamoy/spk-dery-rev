@@ -56,22 +56,21 @@
                                             <label for="kode" class="col-sm-2 col-form-label">Gejala</label>
                                         </div>
                                         <div class="col-md-8 mb-4">
-                                            <select class="choices form-select multiple-remove" name="relasi_gejala[]"
-                                                multiple="multiple">
+                                            <select class="choices form-select multiple-remove" name="relasi_gejala[]" multiple="multiple">
                                                 <option value="">Pilih Gejala</option>
                                                 @foreach ($gejala as $g)
-                                                    <option value="{{ $g->id }}"
-                                                        {{ in_array($g->id, $hasil) ? 'selected' : '' }}>
+
+                                                    <option value="{{ $g->id }}" {{ in_array($g->id, $hasil ?? []) ? 'selected' : '' }}>
                                                         {{ $g->kode_gejala }} - {{ $g->nama_gejala }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            @error('kode')
+                                            @error('relasi_gejala')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
 
-                                        <input type="hidden" name="id" id="id" value="{{ $id->id }}">
+                                        <input type="hidden" name="id" id="id" value="{{ $relasi->id }}">
 
                                         <div class="col-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>

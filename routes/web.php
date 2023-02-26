@@ -32,13 +32,15 @@ Route::resource('masuk', LoginController::class);
 Route::post('masuk', [LoginController::class, 'authenticate']);
 
 Route::get('keluar', [LoginController::class, 'logout']);
+Route::get('daftar-gejala', [GejalaController::class, 'daftar']);
+Route::get('daftar-penyakit', [TKController::class, 'daftar']);
 
 Route::group(['middleware' => ['add.user.data']], function () {
     Route::resource('/dashboard', DashboardController::class)->middleware('auth');
-    Route::resource('relasi', RelasiController::class);
-    Route::resource('gejala', GejalaController::class);
-    Route::resource('tumbuh-kembang', TKController::class);
-    Route::resource('diagnosa', DiagnosaController::class);
+    Route::resource('relasi', RelasiController::class)->middleware('admin');
+    Route::resource('gejala', GejalaController::class)->middleware('admin');
+    Route::resource('tumbuh-kembang', TKController::class)->middleware('admin');
+    Route::resource('diagnosa', DiagnosaController::class)->middleware('auth');
     Route::resource('user-list', UserController::class)->middleware('admin');
     Route::match(['get', 'post'], 'diagnosa/hasil', [DiagnosaController::class, 'hasil'])->name('diagnosa.hasil');
 });

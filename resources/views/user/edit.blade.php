@@ -15,7 +15,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                        <li class="breadcrumb-item" aria-current="page"><a href="{{ route('gejala.index') }}">{{ $subtitle }}</a></li>
+                        <li class="breadcrumb-item" aria-current="page"><a href="{{ route('user-list.index') }}">{{ $subtitle }}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ $title }}</li>
                     </ol>
                 </nav>
@@ -90,6 +90,18 @@
                                                 <label class="form-check-label" for="kelaminP">Perempuan</label>
                                             </div>
                                         @error('kelamin')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="role" class="col-sm-5 col-form-label">Role</label>
+                                            <select name="role" id="role" class="form-select">
+                                                <option value="0" {{ $user->role == 0 ? 'selected' : '' }}>Pasien</option>
+                                                <option value="1" {{ $user->role == 1 ? 'selected' : '' }}>Admin</option>
+                                            </select>
+                                        @error('tanggal')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         </div>

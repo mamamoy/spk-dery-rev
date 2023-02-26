@@ -21,6 +21,20 @@ class GejalaController extends Controller
         ];
         return view('gejala.index', $data);
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function daftar()
+    {
+        $data = [
+            'title' => 'Daftar Gejala',
+            'subtitle' => 'Halaman yang berisikan daftar data gejala yang tersimpan',
+            'isi' => Gejala::all(),
+        ];
+        return view('daftarGejala', $data);
+    }
 
     /**
      * Show the form for creating a new resource.

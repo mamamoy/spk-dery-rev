@@ -87,28 +87,32 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
-            'kode' => 'required|string',
-            'nama_user' => 'required|string',
+            'name' => 'required|string',
+            'username' => 'required|string',
+            'tempat' => 'required|string',
+            'tanggal' => 'required',
+            'kelamin' => 'required',
         ]);
 
         $user = User::all()->where('id', $request->id);
 
 
         $user->first()->update([
-            'kode' => $request->kode,
-            'nama_user' => $request->nama_user,
-            'definisi' => $request->definisi,
-            'solusi' => $request->solusi,
+            'name' => $request->name,
+            'username' => $request->username,
+            'rempat' => $request->rempat,
+            'tanggal' => $request->tanggal,
+            'kelamin' => $request->kelamin,
         ]);
 
 
         if ($user) {
             //redirect dengan pesan sukses
 
-            return redirect()->route('tumbuh-kembang.index')->with(['success' => 'Data Berhasil Disimpan!']);
+            return redirect()->route('user-list.index')->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('tumbuh-kembang.edit')->with(['error' => 'Data Gagal Disimpan!']);
+            return redirect()->route('user-list.edit')->with(['error' => 'Data Gagal Disimpan!']);
         }
     }
 
