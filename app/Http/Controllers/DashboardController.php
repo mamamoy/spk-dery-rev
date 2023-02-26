@@ -27,22 +27,25 @@ class DashboardController extends Controller
 
         $used_ids = Relasi::pluck('penyakit_id')->toArray();
         $penyakits = TKModel::whereIn('id', $used_ids)->get();
+        
 
-        $username = Auth::user()->username;
-        $diagnosa = Diagnosa::where('username', $username)->get();
-
-        if(empty($diagnosa)){
-            $diagnosa = [];
-        }
-        $penyakitData = null;
-        foreach ($diagnosa as $key => $d) {
-            $penyakitData = TKModel::where('id', $d->penyakit_id)->value('nama_penyakit');
-        }
+        
 
         // dd($penyakitData);
 
         
         if(Auth()->user()->role == 1){
+
+            $diagnosaAll= Diagnosa::all();
+
+            if(empty($diagnosaAll)){
+                $diagnosaAll = [];
+            }
+            $penyakitData = null;
+            foreach ($diagnosaAll as $key => $d) {
+                $penyakitData = TKModel::where('id', $d->penyakit_id)->value('nama_penyakit');
+            }
+
             $data = [
                 'title' => 'Dashboard',
                 'subtitle' => 'Statistik',
@@ -50,14 +53,28 @@ class DashboardController extends Controller
                 'penyakit' => count($penyakit),
                 'relasi' => count($penyakits),
                 'user' => count($user),
+                'diagnosa' => count($diagnosaAll),
             ];
         }
         elseif(Auth()->user()->role == 0){
+            $username = Auth::user()->username;
+            $diagnosa = Diagnosa::where('username', $username)->get();
+
+            if(empty($diagnosa)){
+                $diagnosa = [];
+            }
+            $penyakitData = null;
+            foreach ($diagnosa as $key => $d) {
+                $penyakitData = TKModel::where('id', $d->penyakit_id)->value('nama_penyakit');
+            }
             $data = [
                 'title' => 'Dashboard',
-                'subtitle' => 'Daftar Diagnosa',
-                'diagnosa' => $diagnosa,
-                'penyakitData' => $penyakitData,
+                'subtitle' => 'Statistik',
+                'gejala' => count($gejala),
+                'penyakit' => count($penyakit),
+                'relasi' => count($penyakits),
+                'user' => count($user),
+                'diagnosa' => count($diagnosa),
             ];
         }
         

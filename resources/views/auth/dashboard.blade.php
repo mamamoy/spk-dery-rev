@@ -68,9 +68,15 @@
                             <h4 class="card-title">Jumlah Diagnosa</h4>
                         </div>
                         <div class="card-body">
-                            {{-- content --}}
-                            <canvas id="bar" style="display: block; width: 337px; height: 168px;"
-                                class="chartjs-render-monitor" width="337" height="168"></canvas>
+                            <div class="row">
+                                <div class="d-flex align-items-center justify-content-around">
+                                    <img src="{{ asset('dist/assets/images/samples/3.png') }}" class="col-lg-6 col-md-6 col-6"></img>
+                                    <div class="col-lg-4 col-md-4 col-4 text-center">
+                                        <div class="value" akhi="{{ $diagnosa }}">0</div>
+                                        <h5>Diagnosa</h5>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,31 +103,83 @@
         </section>
         @elseif(Auth()->user()->role == 0)
         <section class="section">
-            <div class="card">
-                <div class="card-body">
-                    <table class="table" id="table1">
-                        <thead>
-                            <tr>
-                                <th class="text-center">No</th>
-                                <th class="text-center">Tanggal</th>
-                                <th class="text-center">Nama Pasien</th>
-                                <th class="text-center">Diagnosis</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($diagnosa as $item)
-                                <tr>
-                                    <td class="text-center">{{ $item->id }}</td>
-                                    <td class="text-center">{{ $item->created_at }}</td>
-                                    <td class="text-center">{{ $item->nama_pasien }}</td>
-                                    <td class="text-center">{{ $penyakitData }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Jumlah Gejala</h4>
+                        </div>
+                        <div class="card-body">
+                            {{-- content --}}
+                            <div class="row">
+                                <div class="d-flex align-items-center justify-content-around">
+                                    <img src="{{ asset('dist/assets/images/samples/1.png') }}" class="col-lg-6 col-md-6 col-6"></img>
+                                    <div class="col-lg-4 col-md-4 col-4 text-center">
+                                        <div class="value" akhi="{{ $gejala }}">0</div>
+                                        <h5>Gejala</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Jumlah Tumbuh Kembang</h4>
+                        </div>
+                        <div class="card-body">
+                            {{-- content --}}
+                            <div class="row">
+                                <div class="d-flex align-items-center justify-content-around">
+                                    <img src="{{ asset('dist/assets/images/samples/2.png') }}" class="col-lg-6 col-md-6 col-6"></img>
+                                    <div class="col-lg-4 col-md-4 col-4 text-center">
+                                        <div class="value" akhi="{{ $penyakit }}">0</div>
+                                        <h5>Tumbuh Kembang</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Jumlah Diagnosa</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="d-flex align-items-center justify-content-around">
+                                    <img src="{{ asset('dist/assets/images/samples/3.png') }}" class="col-lg-6 col-md-6 col-6"></img>
+                                    <div class="col-lg-4 col-md-4 col-4 text-center">
+                                        <div class="value" akhi="{{ $diagnosa }}">0</div>
+                                        <h5>Diagnosa</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Jumlah User</h4>
+                        </div>
+                        <div class="card-body">
+                            {{-- content --}}
+                            <div class="row">
+                                <div class="d-flex align-items-center justify-content-around">
+                                    <img src="{{ asset('dist/assets/images/samples/4.png') }}" class="col-lg-6 col-md-6 col-6"></img>
+                                    <div class="col-lg-4 col-md-4 col-4 text-center">
+                                        <div class="value" akhi="{{ $user }}">0</div>
+                                        <h5>Pengguna</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </section>
         @endif
     </div>

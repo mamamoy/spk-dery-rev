@@ -42,7 +42,7 @@
                         </li>
                         <li class="sidebar-item  ">
                             <a href="{{route('diagnosa.showDiagnosa')}}" class='sidebar-link'>
-                                <i class="fa-fw select-all fas"></i>
+                                <i class="fa-fw select-all fas"></i>
                                 <span>History Diagnosa</span>
                             </a>
                         </li>
@@ -94,7 +94,7 @@
                         </li>
                         <li class="sidebar-item  ">
                             <a href="{{route('diagnosa.showDiagnosa')}}" class='sidebar-link'>
-                                <i class="fa-fw select-all fas"></i>
+                                <i class="fa-fw select-all fas"></i>
                                 <span>History Diagnosa </span>
                             </a>
                         </li>

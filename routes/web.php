@@ -44,5 +44,5 @@ Route::group(['middleware' => ['add.user.data']], function () {
     Route::resource('user-list', UserController::class)->middleware('admin');
     Route::match(['get', 'post'], 'diagnosa/hasil', [DiagnosaController::class, 'hasil'])->name('diagnosa.hasil');
     
-    Route::get('diagnosa/history', [DiagnosaController::class, 'showDiagnosa'])->name('diagnosa.showDiagnosa');
 });
+Route::get('history', [DiagnosaController::class, 'showDiagnosa'])->name('diagnosa.showDiagnosa')->middleware('auth');
