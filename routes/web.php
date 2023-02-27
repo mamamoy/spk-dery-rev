@@ -34,6 +34,7 @@ Route::post('masuk', [LoginController::class, 'authenticate']);
 Route::get('keluar', [LoginController::class, 'logout']);
 Route::get('daftar-gejala', [GejalaController::class, 'daftar']);
 Route::get('daftar-penyakit', [TKController::class, 'daftar']);
+Route::get('tentang', [HomeController::class, 'tentang'])->name('home.tentang');
 
 Route::group(['middleware' => ['add.user.data']], function () {
     Route::resource('/dashboard', DashboardController::class)->middleware('auth');
@@ -44,5 +45,5 @@ Route::group(['middleware' => ['add.user.data']], function () {
     Route::resource('user-list', UserController::class)->middleware('admin');
     Route::match(['get', 'post'], 'diagnosa/hasil', [DiagnosaController::class, 'hasil'])->name('diagnosa.hasil');
     
+    Route::get('history', [DiagnosaController::class, 'showDiagnosa'])->name('diagnosa.showDiagnosa')->middleware('auth');
 });
-Route::get('history', [DiagnosaController::class, 'showDiagnosa'])->name('diagnosa.showDiagnosa')->middleware('auth');

@@ -24,6 +24,124 @@
         </div>
         <section class="section">
             <div class="card">
+                <div class="mt-4 ms-4">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#border-less">
+                        Tambah User
+                    </button>
+                </div>
+                <div class="modal fade text-left modal-borderless" id="border-less" tabindex="-1"
+                    aria-labelledby="myModalLabel1" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header justify-content-end">
+                                <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+                                    aria-label="Tutup">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div>
+                                <h5 class="modal-title text-center">Input User</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <form action="{{ route('user-list.store') }}" method="POST">
+                                        @csrf
+                                        <div class="mb-3 row mt-3">
+                                            <label for="name" class="col-sm-2 col-form-label">Nama</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="name" id="name"
+                                                    placeholder="Nama Lengkap" value="{{ old('name') }}">
+                                                    @error('name')
+                                                    <div class="text-danger">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="tempat" class="col-sm-2 col-form-label">Tempat Lahir</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="tempat" id="tempat" placeholder="Tempat Lahir" value="{{ old('tempat') }}">
+                                                @error('tempat')
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror 
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="username" class="col-sm-2 col-form-label">Username</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="username"
+                                                            id="username" placeholder="Username" value="{{ old('username') }}">
+                                                            @error('username')
+                                                            <div class="text-danger">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="tanggal" class="col-sm-2 col-form-label">Tanggal Lahir</label>
+                                            <div class="col-sm-10">
+                                                <input type="date" class="form-control" name="tanggal"
+                                                    id="tanggal" value="{{ old('tanggal') }}">
+                                                    @error('tanggal')
+                                                    <div class="text-danger">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror 
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                                            <div class="col-sm-10">
+                                                <select name="kelamin" id="kelamin" class="form-select">
+                                                    <option value="l">Laki-laki</option>
+                                                    <option value="p">Perempuan</option>
+                                                </select>
+                                                @error('kelamin')
+                                                    <div class="text-danger">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror 
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="password" class="col-sm-2 col-form-label">Password</label>
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control" name="password"
+                                                    id="password" placeholder="Password" value="{{ old('password') }}">
+                                                    @error('password')
+                                                    <div class="text-danger">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror 
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="role" id="role" value="0">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
+                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Tutup</span>
+                                </button>
+                                <button id="success" type="submit" class="btn btn-primary ml-1" data-bs-dismiss="modal">
+                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Simpan</span>
+                                </button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <table class="table" id="table1">
                         <thead>

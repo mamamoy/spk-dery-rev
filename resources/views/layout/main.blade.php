@@ -8,7 +8,7 @@
     
 
     <link rel="stylesheet" href="{{asset('dist/assets/css/main/app.css')}}">
-    <link rel="stylesheet" href="{{asset('dist/assets/css/main/app-dark.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('dist/assets/css/main/app-dark.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('dist/assets/extensions/choices.js/public/assets/styles/choices.css')}}">
 
     <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/favicon.svg')}}" type="image/x-icon">

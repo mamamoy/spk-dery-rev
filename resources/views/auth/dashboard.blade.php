@@ -7,7 +7,7 @@
             font-size: 100px;
             display: block;
             font-weight: bold;
-            color: #fff;
+            color: #25396f;
         }
     </style>
 @endsection
@@ -154,25 +154,6 @@
                                     <div class="col-lg-4 col-md-4 col-4 text-center">
                                         <div class="value" akhi="{{ $diagnosa }}">0</div>
                                         <h5>Diagnosa</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Jumlah User</h4>
-                        </div>
-                        <div class="card-body">
-                            {{-- content --}}
-                            <div class="row">
-                                <div class="d-flex align-items-center justify-content-around">
-                                    <img src="{{ asset('dist/assets/images/samples/4.png') }}" class="col-lg-6 col-md-6 col-6"></img>
-                                    <div class="col-lg-4 col-md-4 col-4 text-center">
-                                        <div class="value" akhi="{{ $user }}">0</div>
-                                        <h5>Pengguna</h5>
                                     </div>
                                 </div>
                             </div>

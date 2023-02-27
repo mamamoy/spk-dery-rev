@@ -61,16 +61,23 @@ class DiagnosaController extends Controller
             }
         }
 
+        if(count($penyakit_terbanyak) > 1){
+            $penyakit_terbanyak = null;
+        }
+
+        // dd($penyakit_terbanyak);
+
         $hasil = [];
         $cek=[];
+        if($penyakit_terbanyak !== null){
         foreach($penyakit_terbanyak as $p){
-            $hasil[] = $p->id;
             
+                $hasil[] = $p->id;
         }
         foreach ($hasil as $key => $value) {
             $cek[] = TKModel::where('id', $value)->get();
         }
-
+    }
 
         $data = [
             'title' => 'Hasil Diagnosa',
@@ -135,7 +142,7 @@ class DiagnosaController extends Controller
         }
         $penyakitData = null;
         foreach ($diagnosa as $key => $d) {
-            $penyakitData = TKModel::where('id', $d->penyakit_id)->value('nama_penyakit');
+            $penyakitData = TKModel::where('id', $d->penyakit_id)->get();
         }
 
         // dd($penyakitData);
@@ -148,14 +155,14 @@ class DiagnosaController extends Controller
                 'title' => 'History Diagnosa',
                 'subtitle' => 'Daftar Diagnosa',
                 'diagnosa' => $diagnosa,
-                'penyakitData' => $penyakitData,
+                // 'penyakitData' => TKModel::all(),
             ];
         } elseif (Auth()->user()->role == 0) {
             $data = [
                 'title' => 'History Diagnosa',
                 'subtitle' => 'Daftar Diagnosa',
                 'diagnosa' => $diagnosa,
-                'penyakitData' => $penyakitData,
+                // 'penyakitData' => $penyakitData,
             ];
         }
 

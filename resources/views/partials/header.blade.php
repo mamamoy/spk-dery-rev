@@ -14,7 +14,7 @@
                 <h2>Sistem Pakar Diagnosa Tumbuh Kembang</h2>
             </div>
         </div>
-            <div class="container-fluid justify-content-end align-items-middle">
+            <div class="container-fluid justify-content-end align-items-middle" hidden>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"

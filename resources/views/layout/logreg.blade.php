@@ -69,7 +69,7 @@
                                             </div>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="index.html" class='menu-link'>
+                                            <a href="{{route('home.tentang')}}" class='menu-link'>
                                                 <span class="fw-bold">Tentang</span>
                                             </a>
                                         </li>

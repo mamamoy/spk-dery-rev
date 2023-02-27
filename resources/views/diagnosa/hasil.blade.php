@@ -37,8 +37,14 @@
                         </div>
                         <input type="text" name="nama_pasien" id="nama_pasien" value="{{ $pasien }}" hidden>
                         @foreach ($hasil as $item)
-                            <input type="hidden" name="penyakit_id[]" id="penyakit_id" value="{{ $item[0]->id }}">
+                            <input type="hidden" name="penyakit_id[]" id="penyakit_id" value="{{$item[0]->id}}">
                         @endforeach
+
+                        @if(empty($hasil))
+                        <div class="d-flex align-items-center justify-content-center" style="height:200px">
+                            <h3 class="text-center">Penyakit tidak ditemukan. Silahkan ke puskesmas/rumah sakit terdekat.</h3>
+                        </div>
+                        @else
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -57,9 +63,14 @@
                                 @endforeach
                             </tbody>
                         </table>
+                            
+                    @endif
                         <div class="row">
                             <div class="d-flex justify-content-evenly">
+                                @if (empty($hasil))
+                                @else
                                 <button class="btn btn-outline-success" type="submit">Simpan Diagnosa</button>
+                                @endif
                                 <a class="btn btn-outline-secondary" href="{{route('diagnosa.index')}}">Diagnosa Kembali</a>
                             </div>
                         </div>

@@ -20,6 +20,14 @@ class HomeController extends Controller
         return view('home', $data);
     }
 
+    public function tentang(){
+        $data = [
+            'title' => 'Tentang',
+            'subtitle' => 'Informasi Tentang SIPATUBA',
+        ];
+        return view('tentang', $data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

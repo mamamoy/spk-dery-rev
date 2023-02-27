@@ -44,7 +44,34 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+            'tempat' => 'required',
+            'username' => 'required|min:5|unique:users',
+            'tanggal' => 'required',
+            'kelamin' => 'required',
+            'password' => 'required|min:5',
+            'role' => 'required'
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'tempat' => $request->tempat,
+            'username' => $request->username,
+            'tanggal' => $request->tanggal,
+            'kelamin' => $request->kelamin,
+            'password' => bcrypt($request->password),
+            'role' => $request->role
+        ]);
+
+        if ($user) {
+            //redirect dengan pesan sukses
+            return redirect()->route('user-list.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('user-list.index')->with(['error' => 'Data Gagal Disimpan!']);
+        }
+        
     }
 
     /**
@@ -64,6 +91,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
         $user = User::all()->find($id);

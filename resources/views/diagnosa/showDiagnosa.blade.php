@@ -39,7 +39,7 @@
                                         <td class="text-center">{{ $item->id }}</td>
                                         <td class="text-center">{{ $item->created_at }}</td>
                                         <td class="text-center">{{ $item->nama_pasien }}</td>
-                                        <td class="text-center">{{ $penyakitData }}</td>
+                                        <td class="text-center">{{ \App\Models\TKModel::findOrFail($item->penyakit_id)->nama_penyakit}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
