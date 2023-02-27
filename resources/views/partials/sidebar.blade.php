@@ -9,8 +9,8 @@
                             </div>
                         </div>
                         <div class="user-name mt-2">
-                            <h6 class="mb-0 text-gray-600 name">{{request()->get('name')}}</h6>
-                            <p class="mb-0 text-sm text-gray-600 role">@if(request()->get('role') == 1)
+                            <h6 class="mb-0 text-gray-600 name">{{Auth::user()->name}}</h6>
+                            <p class="mb-0 text-sm text-gray-600 role">@if(Auth::user()->role== 1)
                                 Admin
                             @else
                                 Pasien

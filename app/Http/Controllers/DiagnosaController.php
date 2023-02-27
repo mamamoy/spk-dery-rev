@@ -126,7 +126,6 @@ class DiagnosaController extends Controller
 
     public function showDiagnosa()
     {
-        // dd('wdwwwd');
         $used_ids = Relasi::pluck('penyakit_id')->toArray();
         $penyakits = TKModel::whereIn('id', $used_ids)->get();
         
