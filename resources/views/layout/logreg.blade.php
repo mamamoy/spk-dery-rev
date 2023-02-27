@@ -47,7 +47,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item has-sub">
-                                            <a href="index.html" class='menu-link'>
+                                            <a href="#" class='menu-link'>
                                                 <span class="fw-bold">Data Tumbuh Kembang</span>
                                             </a>
                                             <div class="submenu ">

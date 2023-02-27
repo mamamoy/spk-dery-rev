@@ -42,7 +42,7 @@
 
                         @if(empty($hasil))
                         <div class="d-flex align-items-center justify-content-center" style="height:200px">
-                            <h3 class="text-center">Penyakit tidak ditemukan. Silahkan ke puskesmas/rumah sakit terdekat.</h3>
+                            <h4 class="text-center">Penyakit tidak ditemukan</h4>
                         </div>
                         @else
                         <table class="table table-bordered">

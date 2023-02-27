@@ -44,16 +44,17 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'username' => ['required'],
             'password' => ['required'],
-            'role' => ['required']
+            // 'role' => ['required']
         ]);
 
+        // dd(Auth::attempt($credentials));
         // $credentials['password'] = Hash::make($credentials['password']);
         if (Auth::attempt($credentials)) {
 
             $request->session()->regenerate();
 
-            $role = $credentials['role'];
-            $request->session()->put('role', $role);
+            // $role = $credentials['role'];
+            // $request->session()->put('role', $role);
 
             return redirect()->intended('dashboard');
         }
