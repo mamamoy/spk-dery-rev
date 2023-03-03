@@ -128,7 +128,7 @@
                                     <td class="text-center">{{ $item->kode}}</td>
                                     <td class="text-center">{{ $item->definisi }}</td>
                                     <td class="text-center">{{ $item->solusi }}</td>
-                                    <td class="d-flex justify-content-around">
+                                    <td class="d-flex justify-content-around align-items-center" style="height: 199.117px">
                                         <dl class="dt ma0 pa0 text-center">
                                             <dt class="the-icon">
                                                 <a href="/tumbuh-kembang/{{ $item->id }}/edit" class="btn btn-sm">

@@ -60,6 +60,7 @@ class DiagnosaController extends Controller
                 $penyakit_terbanyak[] = $p;
             }
         }
+        // dd($penyakit_terbanyak);
 
         if(count($penyakit_terbanyak) > 1){
             $penyakit_terbanyak = null;

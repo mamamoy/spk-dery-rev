@@ -32,6 +32,7 @@
                             <tr>
                                 <th class="text-center">No</th>
                                 <th class="text-center">KD-TK</th>
+                                <th class="text-center">Nama-TK</th>
                                 <th class="text-center">Definisi</th>
                                 <th class="text-center">Solusi Pencegahan</th>
                             </tr>
@@ -41,7 +42,8 @@
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td class="text-center">{{ $item->kode}}</td>
-                                    <td class="text-center">{{ $item->nama_penyakit }}</td>
+                                    <td class="text-center">{{ $item->nama_penyakit}}</td>
+                                    <td class="text-center">{{ $item->definisi }}</td>
                                     <td class="text-center">{{ $item->solusi }}</td>
                                 </tr>
                             @endforeach
