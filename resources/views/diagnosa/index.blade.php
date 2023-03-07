@@ -29,15 +29,51 @@
                     <form action="{{ route('diagnosa.hasil') }}" method="POST" data-parsley-validate>
                         @csrf
 
-                        <div class="mx-auto text-center col-md-6 mb-4">
+                        {{-- <div class="mx-auto text-center col-md-6 mb-4">
                             <h5>Nama Pasien</h5>
                             <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="text" id="nama_pasien" name="nama_pasien"
                             placeholder="Nama Pasien" value="{{ old('nama_pasien') }}" data-parsley-required="true" data-parsley-required-message="Nama tidak boleh kosong">
+                        </div> --}}
+
+
+            <div class="card-header">
+                <h4 class="card-title text-center">Data Pasien</h4>
+            </div>
+
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <div class="form-group mb-4">
+                            <label for="nama_pasien">Nama Pasien</label>
+                            <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="text" id="nama_pasien" name="nama_pasien"
+                            placeholder="Nama Pasien" value="{{ old('nama_pasien') }}" data-parsley-required="true" data-parsley-required-message="Nama tidak boleh kosong">
                         </div>
+                        <div class="form-group mb-4">
+                            <label for="tLahir">Tanggal Lahir</label>
+                            <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="date" id="tLahir" name="tLahir" value="{{ old('tLahir') }}" data-parsley-required="true" data-parsley-required-message="Tanggal lahir tidak boleh kosong">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group mb-4">
+                            <label for="telp">Nomor Telepon</label>
+                            <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="text" id="telp" name="telp"
+                            placeholder="Nomor Telepon" value="{{ old('telp') }}" data-parsley-required="true" data-parsley-type="number" data-parsley-required-message="Nomor telepon tidak boleh kosong">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="alamat">Alamat</label>
+                            <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="text" id="alamat" name="alamat"
+                            placeholder="Alamat Pasien" value="{{ old('alamat') }}" data-parsley-required="true" data-parsley-required-message="Alamat tidak boleh kosong">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+                        
 
                         <div class="mx-auto text-center col-md-6 mt-4">
                             <h5>{{ $comment }}</h5>
-                            <div class="overflow-scroll" style="height: 240px">
+                            <div class="mt-4 overflow-scroll" style="height: 300px">
                                 <div class="card widget-todo ">
                                     
                                     <div class="card-body px-0 py-1" >

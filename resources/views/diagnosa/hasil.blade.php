@@ -28,6 +28,11 @@
                     <form action="{{ route('diagnosa.store') }}" method="POST">
                         @csrf
 
+                        @foreach($gejala as $numb => $item)
+                        <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="text" id="gejala_id_{{$numb}}" name="gejala_id[]"
+                            placeholder="{{$item}}" value="{{$item}}" data-parsley-required="true" data-parsley-required-message="Nama tidak boleh kosong" hidden>
+                        @endforeach
+
                         <div class="mx-auto text-center col-md-6 mb-4 mt-2">
                             <h5>Nama Pasien</h5>
                             <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="text"
@@ -39,6 +44,29 @@
                         @foreach ($hasil as $item)
                             <input type="hidden" name="penyakit_id[]" id="penyakit_id" value="{{$item[0]->id}}">
                         @endforeach
+            
+                        <div class="card-body" hidden>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <label for="tLahir">Tanggal Lahir</label>
+                                        <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="date" id="tLahir" name="tLahir" value="{{ $tLahir }}" data-parsley-required="true" data-parsley-required-message="Tanggal lahir tidak boleh kosong">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-4">
+                                        <label for="telp">Nomor Telepon</label>
+                                        <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="text" id="telp" name="telp"
+                                        placeholder="Nomor Telepon" value="{{ $telp }}" data-parsley-required="true" data-parsley-required-message="Nomor telepon tidak boleh kosong">
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="alamat">Alamat</label>
+                                        <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="text" id="alamat" name="alamat"
+                                        placeholder="Alamat Pasien" value="{{ $alamat }}" data-parsley-required="true" data-parsley-required-message="Alamat tidak boleh kosong">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         @if(empty($hasil))
                         <div class="d-flex align-items-center justify-content-center" style="height:200px">

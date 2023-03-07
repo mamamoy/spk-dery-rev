@@ -6,6 +6,8 @@ use App\Models\Diagnosa;
 use App\Models\Gejala;
 use App\Models\Relasi;
 use App\Models\TKModel;
+use App\Models\DetailKonsul;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,6 +44,9 @@ class DiagnosaController extends Controller
 
         $diagnosa = $this->validate($request, [
             'nama_pasien' => 'required|string',
+            'tLahir' => 'required',
+            'alamat' => 'required|string',
+            'telp' => 'required|numeric',
         ]);
 
         //ambil semua data relasi gejala dan penyakit
@@ -60,7 +65,7 @@ class DiagnosaController extends Controller
                 $penyakit_terbanyak[] = $p;
             }
         }
-        // dd($penyakit_terbanyak);
+        
 
         if(count($penyakit_terbanyak) > 1){
             $penyakit_terbanyak = null;
@@ -83,6 +88,10 @@ class DiagnosaController extends Controller
         $data = [
             'title' => 'Hasil Diagnosa',
             'pasien' => $request->input('nama_pasien'),
+            'telp' => $request->input('telp'),
+            'tLahir' => $request->input('tLahir'),
+            'alamat' => $request->input('alamat'),
+            'gejala' => $request->input('gejala'),
             'hasil' => $cek,
         ];
 
@@ -105,15 +114,27 @@ class DiagnosaController extends Controller
      */
     public function store(Request $request)
     {
+
         // dd($request);
         $id = implode(',', $request->penyakit_id);
         $diagnosa = Diagnosa::create([
             'nama_pasien' => $request->nama_pasien,
+            'tLahir' => $request->tLahir,
+            'alamat' => $request->alamat,
+            'telp' => $request->telp,
             'penyakit_id' => $id,
             'username' => Auth::user()->username,
         ]);
 
-        // dd($diagnosa);
+        $gejala_id = $request->input('gejala_id');
+
+        foreach ($gejala_id as $itemId){
+            $detailKonsul = DetailKonsul::create([
+                'gejala_id' => $itemId,
+                'konsul_id' => $diagnosa->id,
+            ]);
+        }
+        // dd($detailKonsul);
 
     if ($diagnosa) {
         //redirect dengan pesan sukses
@@ -177,9 +198,30 @@ class DiagnosaController extends Controller
      * @param  \App\Models\Diagnosa  $diagnosa
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-       
+       $diagnosa = Diagnosa::find($id);
+       $detail = DetailKonsul::where('konsul_id', $id)->with('dataGejala')->get();
+
+       $penyakit = TKModel::where('id', $diagnosa->penyakit_id)->first();
+
+
+
+       $tLahir = Carbon::parse($diagnosa->tLahir);
+
+
+       $data = [
+        'title' => 'Hasil',
+        'subtitle' => 'Laporan Hasil Diagnosa',
+        'isi' => $diagnosa,
+        'usia' => $tLahir->age,
+        'detail' => $detail,
+        'penyakit' => $penyakit,
+    ];
+
+    // dd($data);
+
+    return view('diagnosa.laporan', $data);
     }
 
     /**

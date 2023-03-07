@@ -11,14 +11,13 @@
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>{{ $title }}</h3>
                 </div>
-                <div class="col-12 col-md-6 order-md-2 order-first">
+                {{-- <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ $title }}</li>
+                            <li class="breadcrumb-item active" aria-current="page">History</li>
                         </ol>
                     </nav>
-                </div>
+                </div> --}}
             </div>
         </div>
         <section class="section">
@@ -31,6 +30,7 @@
                                     <th class="text-center">Tanggal</th>
                                     <th class="text-center">Nama Pasien</th>
                                     <th class="text-center">Diagnosis</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,6 +40,30 @@
                                         <td class="text-center">{{ $item->created_at }}</td>
                                         <td class="text-center">{{ $item->nama_pasien }}</td>
                                         <td class="text-center">{{ \App\Models\TKModel::findOrFail($item->penyakit_id)->nama_penyakit}}</td>
+                                        <td class="d-flex justify-content-around">
+                                            <dl class="dt ma0 pa0 text-center">
+                                                <dt class="the-icon">
+                                                    <a href="/diagnosa/{{ $item->id }}" class="btn btn-sm">
+                                                        <span class="fa-fw select-all fas"></span>
+                                                    </a>
+                                                </dt>
+                                                <dd class="mt-2 text-sm select-all word-wrap dtc v-top tl f2 icon-name">Lihat
+                                                </dd>
+                                            </dl>
+                                            <dl class="dt ma0 pa0 text-center">
+                                                <dt class="the-icon">
+                                                    <form method="POST" action="{{ route('diagnosa.destroy', $item->id) }}">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-sm">
+                                                            <span class="fa-fw select-all fas"></span>
+                                                        </button>
+                                                    </form>
+                                                </dt>
+                                                <dd class="mt-2 text-sm select-all word-wrap dtc v-top tl f2 icon-name">Hapus
+                                                </dd>
+                                            </dl>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

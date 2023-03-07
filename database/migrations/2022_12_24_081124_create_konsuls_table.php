@@ -19,6 +19,9 @@ class CreateKonsulsTable extends Migration
             $table->unsignedBigInteger('penyakit_id');
             $table->string('nama_pasien');
             $table->string('username');
+            $table->string('tLahir');
+            $table->string('telp');
+            $table->string('alamat');
         });
     }
 
