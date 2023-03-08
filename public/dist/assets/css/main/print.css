@@ -3,6 +3,9 @@
     .cetak {
       display: none;
     }
+    @page {
+        margin: 0;
+      }
     /* Remove unwanted elements */
     header, footer {
       display: none;
