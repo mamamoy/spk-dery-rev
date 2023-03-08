@@ -251,9 +251,15 @@ class DiagnosaController extends Controller
      * @param  \App\Models\Diagnosa  $diagnosa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Diagnosa $diagnosa)
+    public function destroy($id)
     {
-        //
+        $diagnosa = Diagnosa::find($id);
+        $diagnosa->delete();
+        $detail = DetailKonsul::where('konsul_id', $id)->get();
+        foreach ($detail as $key => $value) {
+            $value->delete();
+        }
+        return redirect()->route('diagnosa.showDiagnosa')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 
     /**
