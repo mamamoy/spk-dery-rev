@@ -1,0 +1,52 @@
+@media print {
+    /* Hide print button */
+    .cetak {
+      display: none;
+    }
+    /* Remove unwanted elements */
+    header, footer {
+      display: none;
+    }
+    /* Adjust margins */
+    body {
+    margin: 0;
+    }
+    .container {
+        margin: 0 auto;
+        padding: 20px;
+        max-width: 960px;
+    }
+    .container .title{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    .data{
+        display: block;
+    }
+    .container hr {
+        display: block !important;
+    height: 1px;
+    border: none;
+    border-top: 1px solid #000;
+    margin: 1em 0;
+    padding: 0;
+    }
+    /* Set font size
+    *, p, h2, h3, h4, h5, h6 {
+      font-size: 11pt !important;
+    } */
+    p {
+        font-size: 11pt !important;
+    }
+    .row {
+        display: block;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .col-md-6 {
+        float: left;
+        width: 50%;
+    }
+  }

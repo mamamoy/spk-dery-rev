@@ -43,7 +43,7 @@
                                         <td class="d-flex justify-content-around">
                                             <dl class="dt ma0 pa0 text-center">
                                                 <dt class="the-icon">
-                                                    <a href="/diagnosa/{{ $item->id }}" class="btn btn-sm">
+                                                    <a href="/diagnosa/{{ $item->id }}" target="_blank" class="btn btn-sm">
                                                         <span class="fa-fw select-all fas"></span>
                                                     </a>
                                                 </dt>

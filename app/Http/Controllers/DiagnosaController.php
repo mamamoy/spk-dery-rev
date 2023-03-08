@@ -204,17 +204,15 @@ class DiagnosaController extends Controller
        $detail = DetailKonsul::where('konsul_id', $id)->with('dataGejala')->get();
 
        $penyakit = TKModel::where('id', $diagnosa->penyakit_id)->first();
-
-
-
        $tLahir = Carbon::parse($diagnosa->tLahir);
+       $age = $tLahir->diffForHumans(null, true, false, 2);
 
 
        $data = [
         'title' => 'Hasil',
         'subtitle' => 'Laporan Hasil Diagnosa',
         'isi' => $diagnosa,
-        'usia' => $tLahir->age,
+        'usia' => $age,
         'detail' => $detail,
         'penyakit' => $penyakit,
     ];
