@@ -31,7 +31,7 @@
         <h3 class="text-center">Data Pasien</h3>
         <hr>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="row">
                         <div class="col-md-6">
                             <p>Nama</p>
@@ -46,20 +46,29 @@
                     </div>
                     
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="row">
                         <div class="col-md-6">
-                            <p>Tanggal Diagnosa</p>
                             <p>No Telepon</p>
                             <p>Alamat</p>
                         </div>
                         <div class="col-md-6">
-                            <p>: {{ $isi->created_at->format('Y-m-d') }}</p>
                             <p>: {{ $isi->telp }}</p>
                             <p>: {{ $isi->alamat }}</p>
                         </div>
                     </div>
-                    
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Tanggal Diagnosa</p>
+                            <p>Tanggal Cetak</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>: {{ $isi->created_at->format('Y-m-d H:m') }}</p>
+                            <P>: {{$tanggal_cetak}}</P>
+                        </div>
+                    </div>
                 </div>
     
                 <hr>
@@ -92,17 +101,8 @@
             </div>
         </div>
     </div>
-    <div id="printTime" class="text-end"></div>
 </body>
-<script>
-    // Menambahkan event listener untuk tombol cetak
-    document.querySelector('.btn-print').addEventListener('click', function() {
-        // Mengambil elemen untuk menampilkan waktu cetak
-        var printTime = document.getElementById('printTime');
-        // Mengatur teks elemen dengan waktu saat ini
-        printTime.textContent = 'Tanggal Dicetak: ' + new Date().toLocaleString();
-    });
-</script>
+
 
 <script src="{{ asset ('dist/assets/js/bootstrap.js')}}"></script>
 <script src="{{ asset ('dist/assets/js/app.js')}}"></script>

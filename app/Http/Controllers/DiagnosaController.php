@@ -138,7 +138,7 @@ class DiagnosaController extends Controller
 
     if ($diagnosa) {
         //redirect dengan pesan sukses
-        return redirect()->route('dashboard.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('diagnosa.showDiagnosa')->with(['success' => 'Data Berhasil Disimpan!']);
     } else {
         //redirect dengan pesan error
         return redirect()->route('diagnosa.index')->with(['error' => 'Data Gagal Disimpan!']);
@@ -215,6 +215,7 @@ class DiagnosaController extends Controller
         'usia' => $age,
         'detail' => $detail,
         'penyakit' => $penyakit,
+        'tanggal_cetak' => Carbon::now()->format('Y-m-d H:i'),
     ];
 
     // dd($data);

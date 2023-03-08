@@ -49,4 +49,8 @@
         float: left;
         width: 50%;
     }
+    .col-md-4 {
+        float: left;
+        width: 50%;
+    }
   }
