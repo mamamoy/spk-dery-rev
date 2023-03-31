@@ -18,7 +18,7 @@
                         <div class="card">
                             <div class="row">
                                 <div class="d-flex align-items-center justify-content-around">
-                                    <img src="{{ asset('dist/assets/images/samples/1.png') }}" class="mt-4 mb-4"
+                                    <img src="{{ asset('dist/assets/images/pk.png') }}" class="mt-4 mb-4"
                                         style="height: 330px"></img>
 
                                 </div>

@@ -16,6 +16,12 @@
                         <article>
                             <h3 class="text-center mb-4">Sistem Pakar Diagnosa
                                 Tumbuh Kembang Balita Dengan Metode Forward Chaining Berbasis Website</h3>
+                                <div class="text-center mb-3 mt-2">
+                                    <img src="{{ asset('dist/assets/images/pk.png') }}" alt="Pohon Keputusan" style="height: 500px">
+                                </div>
+                                <div class="text-center">
+                                    <p style="font-size: 0.9em"><i>Gambar Pohon Keputusan</i></p>
+                                </div>
                                 <p>Balita merupakan istilah dari kata bawah lima tahun atau anak yang telah
                                     menginjak usia diatas satu tahun. Pada masa ini balita dipengaruhi oleh
                                     pertumbuhan dasar dan perkembangan kemampuan berbahasa, kreativitas,

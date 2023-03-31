@@ -73,7 +73,7 @@
 
                         <div class="mx-auto text-center col-md-6 mt-4">
                             <h5>{{ $comment }}</h5>
-                            <div class="mt-4 overflow-scroll" style="height: 300px">
+                            <div class="mt-4">
                                 <div class="card widget-todo ">
                                     
                                     <div class="card-body px-0 py-1" >

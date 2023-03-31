@@ -24,7 +24,7 @@ class DiagnosaController extends Controller
         $data = [
             'title' => 'Diagnosa',
             'subtitle' => 'Halaman yang berisikan input data diagnosa',
-            'isi' => Gejala::all(),
+            'isi' => Gejala::inRandomOrder()->get(),
             'comment' => 'Silahkan centang gejala yang anda alami dibawah ini',
         ];
         return view('diagnosa.index', $data);
@@ -65,25 +65,23 @@ class DiagnosaController extends Controller
                 $penyakit_terbanyak[] = $p;
             }
         }
-        
-
-        if(count($penyakit_terbanyak) > 1){
-            $penyakit_terbanyak = null;
-        }
 
         // dd($penyakit_terbanyak);
 
         $hasil = [];
         $cek=[];
-        if($penyakit_terbanyak !== null){
-        foreach($penyakit_terbanyak as $p){
-            
+        
+        if (count($penyakit_terbanyak) > 1) {
+            foreach ($penyakit_terbanyak as $p) {
                 $hasil[] = $p->id;
+            }
+        } else {
+            $hasil[] = $penyakit_terbanyak[0]->id;
         }
+        
         foreach ($hasil as $key => $value) {
             $cek[] = TKModel::where('id', $value)->get();
         }
-    }
 
         $data = [
             'title' => 'Hasil Diagnosa',

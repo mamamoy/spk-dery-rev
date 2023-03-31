@@ -7,15 +7,15 @@
     @yield('title')
 
     <link rel="stylesheet" href="{{ asset('dist/assets/css/main/app.css') }}">
-    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/favicon.svg') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/favicon.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/favicon2.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/favicon1.png') }}" type="image/png">
 
     <link rel="stylesheet" href="{{asset('dist/assets/css/main/app.css')}}">
     <link rel="stylesheet" href="{{asset('dist/assets/css/main/app-dark.css')}}">
     <link rel="stylesheet" href="{{asset('dist/assets/extensions/choices.js/public/assets/styles/choices.css')}}">
 
-    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/favicon.svg')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/favicon.png')}}" type="image/png">
+    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/favicon2.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/favicon1.png')}}" type="image/png">
     <link rel="stylesheet" href="{{asset('dist/assets/css/shared/iconly.css')}}">
     <link rel="stylesheet" href="{{asset('dist/assets/css/pages/fontawesome.css')}}">
 
@@ -34,7 +34,7 @@
                 <div class="header-top">
                     <div class="container">
                         <div class="d-flex align-items-center">
-                            <img src="{{ asset('dist/assets/images/logo/favicon.png') }}" class="rounded float-start"
+                            <img src="{{ asset('dist/assets/images/logo/favicon1.png') }}" class="rounded float-start"
                                 alt="...">
                             <span class="fw-bold fs-4">SIPATUBA</span>
                             <nav class="main-navbar ms-5">

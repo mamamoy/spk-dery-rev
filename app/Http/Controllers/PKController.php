@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class PKController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,18 +14,11 @@ class HomeController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'SIPATUBA',
-            'subtitle' => 'Sistem Pakar Tumbuh Kembang Balita Dengan Metode Forward Chaining Berbasis Website',
+            'title' => 'Pohon Keputusan',
+            'subtitle' => 'Halaman yang berisikan gambar pohon keputusan.',
         ];
-        return view('home', $data);
-    }
 
-    public function tentang(){
-        $data = [
-            'title' => 'Tentang',
-            'subtitle' => 'Informasi Tentang SIPATUBA',
-        ];
-        return view('tentang', $data);
+        return view('pk.index', $data);
     }
 
     /**

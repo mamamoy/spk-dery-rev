@@ -29,7 +29,7 @@
                     <div class="card">
                         <div class="card-header d-flex">
                             <div class="avatar avatar-lg bg-warning me-3">
-                                <img src="assets/images/faces/1.jpg" alt="" srcset="">
+                                <img src="{{ asset('dist/assets/images/logo/1.jpg') }}" alt="" srcset="">
                             </div>
                             <div class="mt-2">
                                 <h5>{{$subtitle}}</h5>
