@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Node;
 
 class HomeController extends Controller
 {
@@ -12,10 +13,28 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    
     {
+        $nodes = Node::all();
+        $nodeDataArray = [];
+
+        foreach ($nodes as $key => $value) {
+            $nodeData = [
+                'key' => $value->id,
+                'text' => $value->text,
+                'stroke' => $value->fill,
+                'fill' => '#E6F9FD',
+            ];
+            if (!is_null($value->parent)) {
+                $nodeData['parent'] = $value->parent_id;
+            }
+            $nodeDataArray[] = $nodeData;
+        }
+
         $data = [
             'title' => 'SIPATUBA',
             'subtitle' => 'Sistem Pakar Tumbuh Kembang Balita Dengan Metode Forward Chaining Berbasis Website',
+            'nodeDataArray' => $nodeDataArray,
         ];
         return view('home', $data);
     }
