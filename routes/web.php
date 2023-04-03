@@ -9,7 +9,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PKController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -40,7 +39,6 @@ Route::get('tentang', [HomeController::class, 'tentang'])->name('home.tentang');
 Route::group(['middleware' => ['add.user.data']], function () {
     Route::resource('/dashboard', DashboardController::class)->middleware('auth');
     Route::resource('relasi', RelasiController::class)->middleware('admin');
-    Route::resource('pohon-keputusan', PKController::class)->middleware('auth');
     Route::resource('gejala', GejalaController::class)->middleware('admin');
     Route::resource('tumbuh-kembang', TKController::class)->middleware('admin');
     Route::resource('diagnosa', DiagnosaController::class)->middleware('auth');
