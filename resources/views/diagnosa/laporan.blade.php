@@ -84,13 +84,15 @@
             </div>
             <hr>
             <h3 class="text-center">Hasil Diagnosa</h3>
+            @foreach ($penyakit as $key => $item)
             <hr>
             <div class="col-md-12">
-                <h6>Penyakit : <u>{{$penyakit->nama_penyakit}}</u></h6>
-                <p class="ms-4">{{$penyakit->definisi}}</p>
+                <h6>Penyakit {{$key+1}} : <u>{{$item->nama_penyakit}}</u></h6>
+                <p class="ms-4">{{$item->definisi}}</p>
                 <h6>Solusi & Pencegahan :</h6>
-                <p class="ms-4">{{$penyakit->solusi}}</p>
+                <p class="ms-4">{{$item->solusi}}</p>
             </div>
+            @endforeach
             <hr>
     </div>
 

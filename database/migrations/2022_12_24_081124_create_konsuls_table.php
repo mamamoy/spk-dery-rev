@@ -16,7 +16,7 @@ class CreateKonsulsTable extends Migration
         Schema::create('konsuls', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('penyakit_id');
+            $table->string('penyakit_id');
             $table->string('nama_pasien');
             $table->string('username');
             $table->string('tLahir');

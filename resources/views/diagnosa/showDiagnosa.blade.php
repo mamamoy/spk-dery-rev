@@ -11,67 +11,72 @@
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>{{ $title }}</h3>
                 </div>
-                {{-- <div class="col-12 col-md-6 order-md-2 order-first">
-                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">History</li>
-                        </ol>
-                    </nav>
-                </div> --}}
             </div>
         </div>
         <section class="section">
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table" id="table1">
-                            <thead>
+            <div class="card">
+                <div class="card-body">
+                    <table class="table" id="table1">
+                        <thead>
+                            <tr>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Tanggal</th>
+                                <th class="text-center">Nama Pasien</th>
+                                <th class="text-center">Diagnosis</th>
+                                <th class="text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($diagnosa as $item)
                                 <tr>
-                                    <th class="text-center">No</th>
-                                    <th class="text-center">Tanggal</th>
-                                    <th class="text-center">Nama Pasien</th>
-                                    <th class="text-center">Diagnosis</th>
-                                    <th class="text-center">Aksi</th>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $item->created_at }}</td>
+                                    <td class="text-center">{{ $item->nama_pasien }}</td>
+                                    @php
+                                        $penyakit_ids = [];
+                                            $penyakit = str_replace('[', '', $item->penyakit_id);
+                                            $penyakit_ids = array_merge($penyakit_ids, explode(',', $penyakit));
+                                    @endphp
+                                    <td class="text-center" style="max-width: 200px">
+                                        @foreach (\App\Models\TKModel::whereIn('id', $penyakit_ids)->get()  as $penyakit)
+                                        @if ($loop->iteration != 1)
+                                            ,
+                                        @endif
+                                        {{ $penyakit->nama_penyakit}}
+                                        @endforeach
+                                    </td>
+                                    <td class="d-flex justify-content-around">
+                                        <dl class="dt ma0 pa0 text-center">
+                                            <dt class="the-icon">
+                                                <a href="/diagnosa/{{ $item->id }}" target="_blank" class="btn btn-sm">
+                                                    <span class="fa-fw select-all fas"></span>
+                                                </a>
+                                            </dt>
+                                            <dd class="mt-2 text-sm select-all word-wrap dtc v-top tl f2 icon-name">Lihat
+                                            </dd>
+                                        </dl>
+                                        <dl class="dt ma0 pa0 text-center">
+                                            <dt class="the-icon">
+                                                <form method="POST" action="{{ route('diagnosa.destroy', $item->id) }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-sm">
+                                                        <span class="fa-fw select-all fas"></span>
+                                                    </button>
+                                                </form>
+                                            </dt>
+                                            <dd class="mt-2 text-sm select-all word-wrap dtc v-top tl f2 icon-name">Hapus
+                                            </dd>
+                                        </dl>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($diagnosa as $item)
-                                    <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td class="text-center">{{ $item->created_at }}</td>
-                                        <td class="text-center">{{ $item->nama_pasien }}</td>
-                                        <td class="text-center">{{ \App\Models\TKModel::findOrFail($item->penyakit_id)->nama_penyakit}}</td>
-                                        <td class="d-flex justify-content-around">
-                                            <dl class="dt ma0 pa0 text-center">
-                                                <dt class="the-icon">
-                                                    <a href="/diagnosa/{{ $item->id }}" target="_blank" class="btn btn-sm">
-                                                        <span class="fa-fw select-all fas"></span>
-                                                    </a>
-                                                </dt>
-                                                <dd class="mt-2 text-sm select-all word-wrap dtc v-top tl f2 icon-name">Lihat
-                                                </dd>
-                                            </dl>
-                                            <dl class="dt ma0 pa0 text-center">
-                                                <dt class="the-icon">
-                                                    <form method="POST" action="{{ route('diagnosa.destroy', $item->id) }}">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit" class="btn btn-sm">
-                                                            <span class="fa-fw select-all fas"></span>
-                                                        </button>
-                                                    </form>
-                                                </dt>
-                                                <dd class="mt-2 text-sm select-all word-wrap dtc v-top tl f2 icon-name">Hapus
-                                                </dd>
-                                            </dl>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
+            </div>
 
-            </section>
+        </section>
     </div>
 @endsection
 

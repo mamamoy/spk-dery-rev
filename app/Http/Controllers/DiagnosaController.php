@@ -115,6 +115,7 @@ class DiagnosaController extends Controller
 
         // dd($request);
         $id = implode(',', $request->penyakit_id);
+        // dd($id);
         $diagnosa = Diagnosa::create([
             'nama_pasien' => $request->nama_pasien,
             'tLahir' => $request->tLahir,
@@ -159,12 +160,11 @@ class DiagnosaController extends Controller
         if (empty($diagnosa)) {
             $diagnosa = [];
         }
+
         $penyakitData = null;
         foreach ($diagnosa as $key => $d) {
             $penyakitData = TKModel::where('id', $d->penyakit_id)->get();
         }
-
-        // dd($penyakitData);
 
 
 
@@ -200,8 +200,18 @@ class DiagnosaController extends Controller
     {
        $diagnosa = Diagnosa::find($id);
        $detail = DetailKonsul::where('konsul_id', $id)->with('dataGejala')->get();
-
-       $penyakit = TKModel::where('id', $diagnosa->penyakit_id)->first();
+       
+       $penyakits = Diagnosa::pluck('penyakit_id');
+       $penyakit_array = [];
+    foreach ($penyakits as $penyakit) {
+        $penyakit = str_replace('[', '', $penyakit);
+        $penyakit_array = array_merge($penyakit_array, explode(',', $penyakit));
+    }
+       $penyakit_data = []; 
+       foreach ($penyakit_array as $key => $value) {
+           $penyakit = TKModel::where('id', $value)->first();
+           $penyakit_data[] = $penyakit;
+       }
        $tLahir = Carbon::parse($diagnosa->tLahir);
        $age = $tLahir->diffForHumans(null, true, false, 2);
 
@@ -212,7 +222,7 @@ class DiagnosaController extends Controller
         'isi' => $diagnosa,
         'usia' => $age,
         'detail' => $detail,
-        'penyakit' => $penyakit,
+        'penyakit' => $penyakit_data,
         'tanggal_cetak' => Carbon::now()->format('Y-m-d H:i'),
     ];
 
