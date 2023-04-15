@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             PenyakitSeeder::class,
             NodeSeeder::class,
             RelasiSeeder::class,
-            // UsersSeeder::class,
+            UsersSeeder::class,
         ]);
     }
 }
