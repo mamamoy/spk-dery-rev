@@ -21,9 +21,18 @@ class UsersSeeder extends Seeder
                 'username' => 'admin',
                 'tanggal' => '2023-02-02',
                 'kelamin' => 'l',
-                'password' => bcrypt('password'),
+                'password' => bcrypt('admin'),
                 'role' => '1'
-            ]
+            ],
+            [
+                'name' => 'pasien',
+                'tempat' => 'surabaya',
+                'username' => 'pasien',
+                'tanggal' => '2023-02-02',
+                'kelamin' => 'l',
+                'password' => bcrypt('pasien'),
+                'role' => '0'
+            ],
         ];
         DB::table('users')->insert($user);
     }

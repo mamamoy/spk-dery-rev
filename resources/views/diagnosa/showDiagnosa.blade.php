@@ -34,17 +34,18 @@
                                     <td class="text-center">{{ $item->nama_pasien }}</td>
                                     @php
                                         $penyakit_ids = [];
-                                            $penyakit = str_replace('[', '', $item->penyakit_id);
-                                            $penyakit_ids = array_merge($penyakit_ids, explode(',', $penyakit));
+                                        $penyakit = str_replace('[', '', $item->penyakit_id);
+                                        $penyakit_ids = array_merge($penyakit_ids, explode(',', $penyakit));
                                     @endphp
                                     <td class="text-center" style="max-width: 200px">
-                                        @foreach (\App\Models\TKModel::whereIn('id', $penyakit_ids)->get()  as $penyakit)
-                                        @if ($loop->iteration != 1)
-                                            ,
-                                        @endif
-                                        {{ $penyakit->nama_penyakit}}
+                                        @foreach (\App\Models\TKModel::whereIn('id', $penyakit_ids)->get() as $penyakit)
+                                            @if ($loop->iteration != 1)
+                                                ,
+                                            @endif
+                                            {{ $penyakit->nama_penyakit }}
                                         @endforeach
                                     </td>
+
                                     <td class="d-flex justify-content-around">
                                         <dl class="dt ma0 pa0 text-center">
                                             <dt class="the-icon">

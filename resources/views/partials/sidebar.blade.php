@@ -104,12 +104,6 @@
                                 <span>History Diagnosa</span>
                             </a>
                         </li>
-                        <li class="sidebar-item  ">
-                            <a href="{{route('pohon-keputusan.index')}}" class='sidebar-link'>
-                                <i class="fa-fw select-all fas"></i>
-                                <span>Pohon Keputusan</span>
-                            </a>
-                        </li>
                         <li class="sidebar-title">Pengaturan</li>
                         <li class="sidebar-item  ">
                             <a href="/keluar" class='sidebar-link'>

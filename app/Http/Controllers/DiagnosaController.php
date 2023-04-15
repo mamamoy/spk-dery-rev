@@ -201,17 +201,17 @@ class DiagnosaController extends Controller
        $diagnosa = Diagnosa::find($id);
        $detail = DetailKonsul::where('konsul_id', $id)->with('dataGejala')->get();
        
-       $penyakits = Diagnosa::pluck('penyakit_id');
-       $penyakit_array = [];
-    foreach ($penyakits as $penyakit) {
-        $penyakit = str_replace('[', '', $penyakit);
-        $penyakit_array = array_merge($penyakit_array, explode(',', $penyakit));
-    }
-       $penyakit_data = []; 
-       foreach ($penyakit_array as $key => $value) {
-           $penyakit = TKModel::where('id', $value)->first();
-           $penyakit_data[] = $penyakit;
-       }
+       $penyakits = $diagnosa->penyakit_id;
+    //    dd($penyakits);
+        $penyakit_array = [];
+         $penyakit = str_replace('[', '', $diagnosa->penyakit_id);
+         $penyakit_array = array_merge($penyakit_array, explode(',', $penyakit));
+        $penyakit_data = []; 
+        foreach ($penyakit_array as $key => $value) {
+            $penyakit = TKModel::where('id', $value)->first();
+            $penyakit_data[] = $penyakit;
+        }
+
        $tLahir = Carbon::parse($diagnosa->tLahir);
        $age = $tLahir->diffForHumans(null, true, false, 2);
 
