@@ -139,7 +139,7 @@ class TKController extends Controller
             //redirect dengan pesan error
             return redirect()->route('tumbuh-kembang.edit')->with(['error' => 'Data Gagal Disimpan!']);
         }
-    }
+    }   
 
     /**
      * Remove the specified resource from storage.

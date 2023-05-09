@@ -41,7 +41,7 @@
                         <p>Umur</p>
                     </div>
                     <div class="col-md-6">
-                        <p>: {{ $isi->nama_pasien }}</p>
+                        <p class="text-capitalize">: {{ $isi->nama_pasien }}</p>
                         <p>: {{ $isi->tLahir }}</p>
                         <p>: {{ $usia }}</p>
                     </div>
@@ -80,21 +80,23 @@
             <h6><u>Gejala Pasien:</u></h6>
             <ol class="ms-4">
                 @foreach ($detail as $gejala)
-                    <li>{{ $gejala->dataGejala->nama_gejala }}</li>
+                    <li @if ($gejala->dataGejala->penting == 1) class="fw-semibold text-primary" @else class:"ma-0" @endif>
+                        {{ $gejala->dataGejala->nama_gejala }}{{$gejala->dataGejala->penting == 1 ? '*' : ''}}
+                    </li>
                 @endforeach
             </ol>
         </div>
         <hr>
         <h3 class="text-center">Hasil Diagnosa</h3>
-            @foreach ($penyakit as $key => $item)
-                <hr>
-                <div class="col-md-12">
-                    <h6>Penyakit {{ $key + 1 }} : <u>{{ $item->nama_penyakit }}</u></h6>
-                    <p class="ms-4">{{ $item->definisi }}</p>
-                    <h6>Solusi & Pencegahan :</h6>
-                    <p class="ms-4">{{ $item->solusi }}</p>
-                </div>
-            @endforeach
+        @foreach ($penyakit as $key => $item)
+            <hr>
+            <div class="col-md-12">
+                <h6>Penyakit {{ $key + 1 }} : <u>{{ $item->nama_penyakit }}</u></h6>
+                <p class="ms-4">{{ $item->definisi }}</p>
+                <h6>Solusi & Pencegahan :</h6>
+                <p class="ms-4">{{ $item->solusi }}</p>
+            </div>
+        @endforeach
         <hr>
     </div>
 

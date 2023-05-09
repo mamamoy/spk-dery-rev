@@ -24,7 +24,7 @@ class DiagnosaController extends Controller
         $data = [
             'title' => 'Diagnosa',
             'subtitle' => 'Halaman yang berisikan input data diagnosa',
-            'isi' => Gejala::inRandomOrder()->get(),
+            'isi' => Gejala::all(),
             'comment' => 'Silahkan centang gejala yang anda alami dibawah ini',
         ];
         return view('diagnosa.index', $data);
@@ -40,7 +40,8 @@ class DiagnosaController extends Controller
         //
     }
 
-    public function hasil(Request $request){
+    public function hasil(Request $request)
+    {
 
         $diagnosa = $this->validate($request, [
             'nama_pasien' => 'required|string',
@@ -50,39 +51,63 @@ class DiagnosaController extends Controller
         ]);
 
         //ambil semua data relasi gejala dan penyakit
-         
-        $gejala = $request->input('gejala');
+
+        $gejala_input = $request->input('gejala');
         $penyakit = TKModel::all();
         $count = 0;
+        $penyakit_important = [];
         $penyakit_terbanyak = [];
+        $penyakit_turunan = [];
 
+        $gejala = Gejala::whereIn('id', $gejala_input)->get();
+        $gejala_penting = $gejala->where('penting', true)->pluck('id')->toArray();
+
+        // dd($gejala_penting);
+        // Cari semua penyakit yang memiliki gejala yang sama dengan input $gejala
         foreach ($penyakit as $p) {
-            $count_gejala = count(array_intersect($gejala, $p->gejala->pluck('id')->toArray()));
+
+            $count_gejala_penting = count(array_intersect($gejala_penting, $p->gejala->pluck('id')->toArray()));
+            $count_gejala = count(array_intersect($gejala_input, $p->gejala->pluck('id')->toArray()));
+
+            if ($count_gejala > 0) {
+                // Simpan penyakit yang memiliki gejala yang sesuai dengan input
+                $penyakit_turunan[] = $p;
+            }
+
             if ($count_gejala > $count) {
                 $count = $count_gejala;
                 $penyakit_terbanyak = [$p];
             } elseif ($count_gejala == $count) {
                 $penyakit_terbanyak[] = $p;
             }
-        }
 
-        // dd($penyakit_terbanyak);
+            if ($count_gejala_penting > 0) {
+                // Simpan penyakit important
+                $penyakit_important[] = $p;
+            }
+        }
 
         $hasil = [];
-        $cek=[];
-        
-        if (count($penyakit_terbanyak) > 1) {
-            foreach ($penyakit_terbanyak as $p) {
-                $hasil[] = $p->id;
-            }
-        } else {
-            $hasil[] = $penyakit_terbanyak[0]->id;
-        }
-        
-        foreach ($hasil as $key => $value) {
-            $cek[] = TKModel::where('id', $value)->get();
-        }
+        $cek = [];
 
+        $hasil = array_merge($penyakit_important, $penyakit_terbanyak, $penyakit_turunan);
+        $hasil = array_unique($hasil);
+        usort($hasil, function ($a, $b) use ($penyakit_important, $penyakit_terbanyak) {
+            if (in_array($a, $penyakit_important)) {
+                return -1; // $a adalah penyakit important
+            } elseif (in_array($a, $penyakit_terbanyak)) {
+                if (in_array($b, $penyakit_important)) {
+                    return 1; // $b adalah penyakit important
+                } else {
+                    return -1; // $a adalah penyakit terbanyak
+                }
+            } else {
+                return 1; // $a dan $b bukan penyakit important atau terbanyak
+            }
+        });
+        // dd($hasil);
+
+        // $cek = TKModel::whereIn('id', $hasil)->get();
         $data = [
             'title' => 'Hasil Diagnosa',
             'pasien' => $request->input('nama_pasien'),
@@ -90,7 +115,7 @@ class DiagnosaController extends Controller
             'tLahir' => $request->input('tLahir'),
             'alamat' => $request->input('alamat'),
             'gejala' => $request->input('gejala'),
-            'hasil' => $cek,
+            'hasil' => $hasil,
         ];
 
         // dd($data);
@@ -127,7 +152,7 @@ class DiagnosaController extends Controller
 
         $gejala_id = $request->input('gejala_id');
 
-        foreach ($gejala_id as $itemId){
+        foreach ($gejala_id as $itemId) {
             $detailKonsul = DetailKonsul::create([
                 'gejala_id' => $itemId,
                 'konsul_id' => $diagnosa->id,
@@ -135,21 +160,21 @@ class DiagnosaController extends Controller
         }
         // dd($detailKonsul);
 
-    if ($diagnosa) {
-        //redirect dengan pesan sukses
-        return redirect()->route('diagnosa.showDiagnosa')->with(['success' => 'Data Berhasil Disimpan!']);
-    } else {
-        //redirect dengan pesan error
-        return redirect()->route('diagnosa.index')->with(['error' => 'Data Gagal Disimpan!']);
-    }
-// dd($hasil);
+        if ($diagnosa) {
+            //redirect dengan pesan sukses
+            return redirect()->route('diagnosa.showDiagnosa')->with(['success' => 'Data Berhasil Disimpan!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('diagnosa.index')->with(['error' => 'Data Gagal Disimpan!']);
+        }
+        // dd($hasil);
     }
 
     public function showDiagnosa()
     {
         $used_ids = Relasi::pluck('penyakit_id')->toArray();
         $penyakits = TKModel::whereIn('id', $used_ids)->get();
-        
+
         $username = Auth::user()->username;
         if (Auth()->user()->role == 0) {
             $diagnosa = Diagnosa::where('username', $username)->get();
@@ -168,8 +193,7 @@ class DiagnosaController extends Controller
 
 
 
-        if (Auth()->user()->role == 1) 
-        {
+        if (Auth()->user()->role == 1) {
             $data = [
                 'title' => 'History Diagnosa',
                 'subtitle' => 'Daftar Diagnosa',
@@ -198,37 +222,37 @@ class DiagnosaController extends Controller
      */
     public function show($id)
     {
-       $diagnosa = Diagnosa::find($id);
-       $detail = DetailKonsul::where('konsul_id', $id)->with('dataGejala')->get();
-       
-       $penyakits = $diagnosa->penyakit_id;
-    //    dd($penyakits);
+        $diagnosa = Diagnosa::find($id);
+        $detail = DetailKonsul::where('konsul_id', $id)->with('dataGejala')->get();
+
+        $penyakits = $diagnosa->penyakit_id;
+        //    dd($penyakits);
         $penyakit_array = [];
-         $penyakit = str_replace('[', '', $diagnosa->penyakit_id);
-         $penyakit_array = array_merge($penyakit_array, explode(',', $penyakit));
-        $penyakit_data = []; 
+        $penyakit = str_replace('[', '', $diagnosa->penyakit_id);
+        $penyakit_array = array_merge($penyakit_array, explode(',', $penyakit));
+        $penyakit_data = [];
         foreach ($penyakit_array as $key => $value) {
             $penyakit = TKModel::where('id', $value)->first();
             $penyakit_data[] = $penyakit;
         }
 
-       $tLahir = Carbon::parse($diagnosa->tLahir);
-       $age = $tLahir->diffForHumans(null, true, false, 2);
+        $tLahir = Carbon::parse($diagnosa->tLahir);
+        $age = $tLahir->diffForHumans(null, true, false, 2);
 
 
-       $data = [
-        'title' => 'Hasil',
-        'subtitle' => 'Laporan Hasil Diagnosa',
-        'isi' => $diagnosa,
-        'usia' => $age,
-        'detail' => $detail,
-        'penyakit' => $penyakit_data,
-        'tanggal_cetak' => Carbon::now()->format('Y-m-d H:i'),
-    ];
+        $data = [
+            'title' => 'Hasil',
+            'subtitle' => 'Laporan Hasil Diagnosa',
+            'isi' => $diagnosa,
+            'usia' => $age,
+            'detail' => $detail,
+            'penyakit' => $penyakit_data,
+            'tanggal_cetak' => Carbon::now()->format('Y-m-d H:i'),
+        ];
 
-    // dd($data);
+        // dd($data);
 
-    return view('diagnosa.laporan', $data);
+        return view('diagnosa.laporan', $data);
     }
 
     /**
@@ -277,6 +301,4 @@ class DiagnosaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    
-       
 }

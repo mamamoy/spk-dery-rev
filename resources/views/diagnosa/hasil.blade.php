@@ -42,7 +42,7 @@
                         </div>
                         <input type="text" name="nama_pasien" id="nama_pasien" value="{{ $pasien }}" hidden>
                         @foreach ($hasil as $item)
-                            <input type="hidden" name="penyakit_id[]" id="penyakit_id" value="{{$item[0]->id}}">
+                            <input type="hidden" name="penyakit_id[]" id="penyakit_id" value="{{$item->id}}">
                         @endforeach
             
                         <div class="card-body" hidden>
@@ -84,9 +84,9 @@
                             <tbody style="height: 300px">
                                 @foreach ($hasil as $item)
                                 <tr>
-                                    <td class="align-top text-center">{{ $item[0]->kode }} - {{ $item[0]->nama_penyakit }}</td>
-                                    <td class="align-top text-center">{{ $item[0]->definisi }}</td>
-                                    <td class="align-top text-center">{{ $item[0]->solusi }}</td>
+                                    <td class="align-top text-center">{{ $item->kode }} - {{ $item->nama_penyakit }}</td>
+                                    <td class="align-top text-center">{{ $item->definisi }}</td>
+                                    <td class="align-top text-center">{{ $item->solusi }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -17,6 +17,7 @@ class CreateGejalasTable extends Migration
             $table->id();
             $table->char('kode_gejala', 8);
             $table->string('nama_gejala');
+            $table->boolean('penting');
             $table->timestamps();
         });
     }
