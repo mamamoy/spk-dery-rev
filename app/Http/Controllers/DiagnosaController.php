@@ -10,6 +10,8 @@ use App\Models\DetailKonsul;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SplStack;
+
 
 
 class DiagnosaController extends Controller
@@ -40,9 +42,38 @@ class DiagnosaController extends Controller
         //
     }
 
+    // DFS function to find diseases based on symptoms
+    private function dfsDiagnosis($gejala_id, $visited, &$result, &$gejala_importance)
+    {
+        $visited[$gejala_id] = true;
+
+        // Find the diseases associated with the current symptom
+        $relasi = Relasi::where('gejala_id', $gejala_id)->get();
+
+        foreach ($relasi as $r) {
+            $penyakit_id = $r->penyakit_id;
+            if (!isset($result[$penyakit_id])) {
+                $result[$penyakit_id] = [
+                    'penyakit' => TKModel::find($penyakit_id)->toArray(),
+                    'count' => 0,
+                    'penting' => 0,
+                ];
+            }
+            $result[$penyakit_id]['count']++;
+            $result[$penyakit_id]['penting'] += $gejala_importance[$gejala_id];
+        }
+
+        // Recursively visit all connected symptoms
+        foreach ($relasi as $r) {
+            $next_gejala_id = $r->gejala_id;
+            if (!$visited[$next_gejala_id]) {
+                $this->dfsDiagnosis($next_gejala_id, $visited, $result, $gejala_importance);
+            }
+        }
+    }
+
     public function hasil(Request $request)
     {
-
         $diagnosa = $this->validate($request, [
             'nama_pasien' => 'required|string',
             'tLahir' => 'required',
@@ -50,64 +81,38 @@ class DiagnosaController extends Controller
             'telp' => 'required|numeric',
         ]);
 
-        //ambil semua data relasi gejala dan penyakit
-
+        // Ambil semua data relasi gejala dan penyakit
         $gejala_input = $request->input('gejala');
+        $gejala_ids = Gejala::whereIn('id', $gejala_input)->pluck('id')->toArray();
         $penyakit = TKModel::all();
-        $count = 0;
-        $penyakit_important = [];
-        $penyakit_terbanyak = [];
-        $penyakit_turunan = [];
 
-        $gejala = Gejala::whereIn('id', $gejala_input)->get();
-        $gejala_penting = $gejala->where('penting', true)->pluck('id')->toArray();
-
-        // dd($gejala_penting);
-        // Cari semua penyakit yang memiliki gejala yang sama dengan input $gejala
-        foreach ($penyakit as $p) {
-
-            $count_gejala_penting = count(array_intersect($gejala_penting, $p->gejala->pluck('id')->toArray()));
-            $count_gejala = count(array_intersect($gejala_input, $p->gejala->pluck('id')->toArray()));
-
-            if ($count_gejala > 0) {
-                // Simpan penyakit yang memiliki gejala yang sesuai dengan input
-                $penyakit_turunan[] = $p;
-            }
-
-            if ($count_gejala > $count) {
-                $count = $count_gejala;
-                $penyakit_terbanyak = [$p];
-            } elseif ($count_gejala == $count) {
-                $penyakit_terbanyak[] = $p;
-            }
-
-            if ($count_gejala_penting > 0) {
-                // Simpan penyakit important
-                $penyakit_important[] = $p;
-            }
+        // Calculate the importance count of each symptom
+        $gejala_importance = array_fill_keys($gejala_ids, 0);
+        foreach ($gejala_ids as $gejala_id) {
+            
+            // Here, you can define the method to calculate the importance count
+            // For example, you might have a table to store the importance score of each symptom
+            // Replace 'importance' with the correct field name in your setup
+            $gejala_importance[$gejala_id] = Gejala::find($gejala_id)->penting;
         }
 
+        // Perform DFS to find diseases based on symptoms
+        $visited = array_fill_keys($gejala_ids, false);
         $hasil = [];
-        $cek = [];
+        foreach ($gejala_ids as $gejala_id) {
+            $this->dfsDiagnosis($gejala_id, $visited, $hasil, $gejala_importance);
+        }
 
-        $hasil = array_merge($penyakit_important, $penyakit_terbanyak, $penyakit_turunan);
-        $hasil = array_unique($hasil);
-        usort($hasil, function ($a, $b) use ($penyakit_important, $penyakit_terbanyak) {
-            if (in_array($a, $penyakit_important)) {
-                return -1; // $a adalah penyakit important
-            } elseif (in_array($a, $penyakit_terbanyak)) {
-                if (in_array($b, $penyakit_important)) {
-                    return 1; // $b adalah penyakit important
-                } else {
-                    return -1; // $a adalah penyakit terbanyak
-                }
-            } else {
-                return 1; // $a dan $b bukan penyakit important atau terbanyak
+        // Sort the diseases based on both symptom count and symptom importance
+        usort($hasil, function ($a, $b) {
+            if ($a['penting'] !== $b['penting']) {
+                return $b['penting'] - $a['penting'];
             }
+            return $b['count'] - $a['count'];
         });
-        // dd($hasil);
 
-        // $cek = TKModel::whereIn('id', $hasil)->get();
+        $penyakit_hasil = array_column($hasil, 'penyakit');
+
         $data = [
             'title' => 'Hasil Diagnosa',
             'pasien' => $request->input('nama_pasien'),
@@ -115,19 +120,24 @@ class DiagnosaController extends Controller
             'tLahir' => $request->input('tLahir'),
             'alamat' => $request->input('alamat'),
             'gejala' => $request->input('gejala'),
-            'hasil' => $hasil,
+            'hasil' => $penyakit_hasil,
         ];
 
         // dd($data);
 
         if ($diagnosa) {
             //redirect dengan pesan sukses
-            return view('diagnosa/hasil', $data)->with(['success => Data Berhasil Disimpan!']);
+            return view('diagnosa/hasil', $data)->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
             //redirect dengan pesan error
             return redirect()->route('diagnosa.index')->with(['error' => 'Data Gagal Disimpan!']);
         }
     }
+
+
+
+
+
 
     /**
      * Store a newly created resource in storage.

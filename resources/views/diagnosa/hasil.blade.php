@@ -28,9 +28,11 @@
                     <form action="{{ route('diagnosa.store') }}" method="POST">
                         @csrf
 
-                        @foreach($gejala as $numb => $item)
-                        <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="text" id="gejala_id_{{$numb}}" name="gejala_id[]"
-                            placeholder="{{$item}}" value="{{$item}}" data-parsley-required="true" data-parsley-required-message="Nama tidak boleh kosong" hidden>
+                        @foreach ($gejala as $numb => $item)
+                            <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="text"
+                                id="gejala_id_{{ $numb }}" name="gejala_id[]" placeholder="{{ $item }}"
+                                value="{{ $item }}" data-parsley-required="true"
+                                data-parsley-required-message="Nama tidak boleh kosong" hidden>
                         @endforeach
 
                         <div class="mx-auto text-center col-md-6 mb-4 mt-2">
@@ -42,64 +44,72 @@
                         </div>
                         <input type="text" name="nama_pasien" id="nama_pasien" value="{{ $pasien }}" hidden>
                         @foreach ($hasil as $item)
-                            <input type="hidden" name="penyakit_id[]" id="penyakit_id" value="{{$item->id}}">
+                            <input type="hidden" name="penyakit_id[]" id="penyakit_id" value="{{ $item['id'] }}">
                         @endforeach
-            
+
                         <div class="card-body" hidden>
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <div class="form-group mb-4">
                                         <label for="tLahir">Tanggal Lahir</label>
-                                        <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="date" id="tLahir" name="tLahir" value="{{ $tLahir }}" data-parsley-required="true" data-parsley-required-message="Tanggal lahir tidak boleh kosong">
+                                        <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px"
+                                            type="date" id="tLahir" name="tLahir" value="{{ $tLahir }}"
+                                            data-parsley-required="true"
+                                            data-parsley-required-message="Tanggal lahir tidak boleh kosong">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-4">
                                         <label for="telp">Nomor Telepon</label>
-                                        <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="text" id="telp" name="telp"
-                                        placeholder="Nomor Telepon" value="{{ $telp }}" data-parsley-required="true" data-parsley-required-message="Nomor telepon tidak boleh kosong">
+                                        <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px"
+                                            type="text" id="telp" name="telp" placeholder="Nomor Telepon"
+                                            value="{{ $telp }}" data-parsley-required="true"
+                                            data-parsley-required-message="Nomor telepon tidak boleh kosong">
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="alamat">Alamat</label>
-                                        <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px" type="text" id="alamat" name="alamat"
-                                        placeholder="Alamat Pasien" value="{{ $alamat }}" data-parsley-required="true" data-parsley-required-message="Alamat tidak boleh kosong">
+                                        <input class="form-control form-control-lg mt-2 mb-2" style="height: 50px"
+                                            type="text" id="alamat" name="alamat" placeholder="Alamat Pasien"
+                                            value="{{ $alamat }}" data-parsley-required="true"
+                                            data-parsley-required-message="Alamat tidak boleh kosong">
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        @if(empty($hasil))
-                        <div class="d-flex align-items-center justify-content-center" style="height:200px">
-                            <h4 class="text-center">Penyakit tidak ditemukan</h4>
-                        </div>
+                        @if (empty($hasil))
+                            <div class="d-flex align-items-center justify-content-center" style="height:200px">
+                                <h4 class="text-center">Penyakit tidak ditemukan</h4>
+                            </div>
                         @else
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">KD-Tumbuh Kembang</th>
-                                    <th class="text-center">Definisi</th>
-                                    <th class="text-center">Solusi Pencegahan</th>
-                                </tr>
-                            </thead>
-                            <tbody style="height: 300px">
-                                @foreach ($hasil as $item)
-                                <tr>
-                                    <td class="align-top text-center">{{ $item->kode }} - {{ $item->nama_penyakit }}</td>
-                                    <td class="align-top text-center">{{ $item->definisi }}</td>
-                                    <td class="align-top text-center">{{ $item->solusi }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                            
-                    @endif
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">KD-Tumbuh Kembang</th>
+                                        <th class="text-center">Definisi</th>
+                                        <th class="text-center">Solusi Pencegahan</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="height: 300px">
+                                    @foreach ($hasil as $item)
+                                        <tr>
+                                            <td class="align-top text-center">{{ $item['kode'] }} -
+                                                {{ $item['nama_penyakit'] }}</td>
+                                            <td class="align-top text-center">{{ $item['definisi'] }}</td>
+                                            <td class="align-top text-center">{{ $item['solusi'] }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @endif
                         <div class="row">
                             <div class="d-flex justify-content-evenly">
                                 @if (empty($hasil))
                                 @else
-                                <button class="btn btn-outline-success" type="submit">Simpan Diagnosa</button>
+                                    <button class="btn btn-outline-success" type="submit">Simpan Diagnosa</button>
                                 @endif
-                                <a class="btn btn-outline-secondary" href="{{route('diagnosa.index')}}">Diagnosa Kembali</a>
+                                <a class="btn btn-outline-secondary" href="{{ route('diagnosa.index') }}">Diagnosa
+                                    Kembali</a>
                             </div>
                         </div>
                     </form>
@@ -117,7 +127,15 @@
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
-                text: 'Data anda berhasil disimpan',
+                text: '{{ session('success') }}',
+            })
+        </script>
+    @elseif (session()->has('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: '{{ session('error') }}',
             })
         </script>
     @endif

@@ -2,6 +2,7 @@
 
 @section('title')
     <title>{{ $title }} | SPDTK</title>
+    
 @endsection
 
 @section('content')
@@ -139,16 +140,24 @@
 @endsection
 
 @push('scripts')
-<script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js "></script>
-@if (session()->has('success'))
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Berhasil',
-        text: 'Data anda berhasil disimpan',
-      })
-</script>
-@endif
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.8/dist/sweetalert2.all.min.js"></script>
+    @if (session()->has('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+            })
+        </script>
+    @elseif (session()->has('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: '{{ session('error') }}',
+            })
+        </script>
+    @endif
 
 
 @endpush

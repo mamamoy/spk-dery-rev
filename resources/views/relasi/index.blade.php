@@ -2,6 +2,7 @@
 
 @section('title')
     <title>{{ $title }} | SPDTK</title>
+    
 @endsection
 
 @section('content')

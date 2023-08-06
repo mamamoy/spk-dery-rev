@@ -91,5 +91,13 @@
                 text: 'Data anda berhasil disimpan',
             })
         </script>
+    @elseif (session()->has('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Tidak Berhasil',
+            text: 'Data anda tidak berhasil disimpan',
+        })
+    </script>
     @endif
 @endpush

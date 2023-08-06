@@ -27,13 +27,59 @@
 
 
 
-                <div class="mt-4 ms-4">
+                <div class="mt-4 ms-4 justify-content-end me-4 d-flex gap-4">
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                         data-bs-target="#border-less">
                         Tambah Node
                     </button>
+                    <!-- button trigger for  Vertically Centered modal -->
+                    <button type="button" class="btn btn-outline-danger block" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalCenter">
+                        Hapus Node
+                    </button>
                 </div>
+                <!-- Vertically Centered modal Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
+                        role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Pilih Node
+                                </h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <i data-feather="x"></i>
+                                </button>
+                            </div>
+                            <form method="POST" id="deleteForm"
+                                action="{{ route('pohon-keputusan.destroy', $node[0]->id) }}">
+                                @csrf
+                                @method('delete')
+                                <div class="modal-body">
+                                    <fieldset class="form-group">
+                                        <select class="form-select" id="basicSelect"
+                                            onchange="updateDeleteFormAction(this)">
+                                            @foreach ($node as $item)
+                                                <option value="{{ $item->id }}">{{ $item->text }}</option>
+                                            @endforeach
+                                        </select>
+                                    </fieldset>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Close</span>
+                                    </button>
+                                    <button type="submit" class="btn btn-danger ml-1" data-bs-dismiss="modal">
+                                        <i class="bx bx-check d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Hapus</span>
+                                    </button>
+                                </div>
+                            </form>
 
+                        </div>
+                    </div>
+                </div>
                 <div class="modal fade text-left modal-borderless" id="border-less" tabindex="-1"
                     aria-labelledby="myModalLabel1" style="display: none;" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -97,7 +143,8 @@
                                     <i class="bx bx-x d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Tutup</span>
                                 </button>
-                                <button id="success" type="submit" class="btn btn-primary ml-1" data-bs-dismiss="modal">
+                                <button id="success" type="submit" class="btn btn-primary ml-1"
+                                    data-bs-dismiss="modal">
                                     <i class="bx bx-check d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Simpan</span>
                                 </button>
@@ -106,19 +153,33 @@
                         </div>
                     </div>
                 </div>
-            
-            <div class="card-body">
-                <div class="text-center">
-                    <div id="myDiagramDiv" style="border: solid 1px black; width:100%; height:500px"></div>
+
+                <div class="card-body">
+                    <div class="text-center">
+                        <div id="myDiagramDiv" style="border: solid 1px black; width:100%; height:500px"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
         </section>
     </div>
 @endsection
 
 @push('scripts')
+
+    <script>
+        function updateDeleteFormAction(selectElement) {
+            // Get the selected value (item ID) from the select element
+            const selectedValue = selectElement.value;
+
+            // Get the form element by ID
+            const deleteForm = document.getElementById('deleteForm');
+
+            // Update the form action with the selected value (item ID)
+            deleteForm.action = "{{ route('pohon-keputusan.destroy', '') }}" + "/" + selectedValue;
+        }
+    </script>
+
     <script src="https://unpkg.com/gojs/release/go.js"></script>
     <script id="code">
         function init() {
@@ -213,4 +274,14 @@
 
         window.addEventListener('DOMContentLoaded', init);
     </script>
+    <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js "></script>
+    @if (session()->has('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+            })
+        </script>
+    @endif
 @endpush

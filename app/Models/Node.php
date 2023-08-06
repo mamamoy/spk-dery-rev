@@ -11,13 +11,4 @@ class Node extends Model
     protected $table = 'nodes';
     protected $fillable = ['text', 'parent_id', 'fill'];
 
-    public function children()
-    {
-        return $this->hasMany(Node::class, 'parent_id');
-    }
-
-    public function parent()
-    {
-        return $this->belongsTo(Node::class, 'parent_id');
-    }
 }

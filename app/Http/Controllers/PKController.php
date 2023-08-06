@@ -126,6 +126,10 @@ class PKController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $node = Node::find($id);
+
+        $node->delete();
+
+        return redirect()->route('pohon-keputusan.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }
