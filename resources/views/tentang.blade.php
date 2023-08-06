@@ -15,9 +15,9 @@
                     <div class="card-body">
                         <article>
                             <h3 class="text-center mb-4">Sistem Pakar Diagnosa
-                                Tumbuh Kembang Balita Dengan Metode Forward Chaining Berbasis Website</h3>
+                                Tumbuh Kembang Balita Dengan Metode Forward Chaining Berbasis Website Di Puskesmas Sekardangan</h3>
                                 <div class="text-center mb-3 mt-2">
-                                    <img src="{{ asset('dist/assets/images/pk.png') }}" alt="Pohon Keputusan" style="height: 500px">
+                                    <img src="{{ asset('dist/assets/images/pk.jpg') }}" alt="Pohon Keputusan" style="height: 500px">
                                 </div>
                                 <div class="text-center">
                                     <p style="font-size: 0.9em"><i>Gambar Pohon Keputusan</i></p>

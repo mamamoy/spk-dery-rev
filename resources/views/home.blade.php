@@ -44,7 +44,7 @@
                             <div class="card-body">
                                 {{-- content --}}
                                 <p>Untuk melihat informasi tumbuh kembang pada balita, klik <a
-                                        href="{{ route('tumbuh-kembang.index') }}">link tautan dibawah ini.</a></p>
+                                        href="/daftar-penyakit">link tautan dibawah ini.</a></p>
                             </div>
                         </div>
                     </div>
