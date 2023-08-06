@@ -7,45 +7,53 @@ use Illuminate\Http\Request;
 use App\Models\Gejala;
 use App\Models\TKModel;
 use App\Models\Node;
+use Illuminate\Support\Facades\Response;
+
 class PKController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-{
-    $nodes = Node::all();
-    $gejala = Gejala::all();
-    $penyakit = TKModel::all();
-    
-    $nodeDataArray = [];
+    {
+        $nodes = Node::all();
+        $gejala = Gejala::all();
+        $penyakit = TKModel::all();
 
-    foreach ($nodes as $key => $value) {
-        $nodeData = [
-            'key' => $value->id,
-            'text' => $value->text,
-            'stroke' => $value->fill,
-            'fill' => '#E6F9FD',
+        $nodeDataArray = [];
+
+        $nodeDataArray = $nodes->map(function ($node) {
+            $data = [
+                'key' => $node->id,
+                'text' => $node->text,
+                'fill' => $node->fill,
+                'stroke' => '#000',
+            ];
+        
+            if ($node->parent_id !== null) {
+                $data['parent'] = $node->parent_id;
+            }
+        
+            return $data;
+        });
+
+
+        $data = [
+            'title' => 'Pohon Keputusan',
+            'subtitle' => 'Halaman yang berisikan alur Pohon Keputusan',
+            'nodeDataArray' => $nodeDataArray,
+            'gejala' => $gejala,
+            'penyakit' => $penyakit,
+            'node' => $nodes,
         ];
-        if (!is_null($value->parent)) {
-            $nodeData['parent'] = $value->parent_id;
-        }
-        $nodeDataArray[] = $nodeData;
-    }
-    
-    $data = [
-        'title' => 'Pohon Keputusan',
-        'subtitle' => 'Halaman yang berisikan alur Pohon Keputusan',
-        'nodeDataArray' => $nodeDataArray,
-        'gejala' => $gejala,
-        'penyakit' => $penyakit,
-        'node' => $nodes,
-    ];
 
-    return view('pk.index', $data);
-}
+        
+
+        return view('pk.index', $data);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -54,7 +62,7 @@ class PKController extends Controller
      */
     public function create()
     {
-        //
+       //
     }
 
     /**

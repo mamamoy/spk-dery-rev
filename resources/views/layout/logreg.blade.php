@@ -7,15 +7,15 @@
     @yield('title')
 
     <link rel="stylesheet" href="{{ asset('dist/assets/css/main/app.css') }}">
-    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/favicon2.png') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/favicon1.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/logo.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/logo.png') }}" type="image/png">
 
     <link rel="stylesheet" href="{{asset('dist/assets/css/main/app.css')}}">
     <link rel="stylesheet" href="{{asset('dist/assets/css/main/app-dark.css')}}">
     <link rel="stylesheet" href="{{asset('dist/assets/extensions/choices.js/public/assets/styles/choices.css')}}">
 
-    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/favicon2.png')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/favicon1.png')}}" type="image/png">
+    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/logo.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/logo.png')}}" type="image/png">
     <link rel="stylesheet" href="{{asset('dist/assets/css/shared/iconly.css')}}">
     <link rel="stylesheet" href="{{asset('dist/assets/css/pages/fontawesome.css')}}">
 
@@ -33,9 +33,9 @@
             <header class="mb-5">
                 <div class="header-top">
                     <div class="container">
-                        <div class="d-flex align-items-center">
-                            <img src="{{ asset('dist/assets/images/logo/favicon1.png') }}" class="rounded float-start"
-                                alt="...">
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="{{ asset('dist/assets/images/logo/logo.png') }}" class="rounded float-start"
+                                alt="..." style="max-width: 4%">
                             <span class="fw-bold fs-4">SIPATUBA</span>
                             <nav class="main-navbar ms-5">
                                 <div class="container">
@@ -81,10 +81,7 @@
                         @auth
                             <ul id="nav1" class="navbar-nav">
                                 <li class="nav-item">
-                                    <form action="/logout" method="post">
-                                        @csrf
-                                       <button type="submit" class="btn btn-primary">Logout</button>
-                                    </form>
+                                    <a href="/keluar" type="button" class="btn btn-primary">Logout</a>
                                 </li>
                             </ul>
                             @else

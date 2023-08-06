@@ -72,7 +72,7 @@ class TKController extends Controller
             return redirect()->route('tumbuh-kembang.index')->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('tumbuh-kembang.create')->with(['error' => 'Data Gagal Disimpan!']);
+            return redirect()->route('tumbuh-kembang.create')->with('error',  'Data Gagal Disimpan!');
         }
     }
 

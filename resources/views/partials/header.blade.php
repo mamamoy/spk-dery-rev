@@ -11,7 +11,7 @@
             </button>
 
             <div class="mt-2 ms-4">
-                <h3 class="mb-0">Sistem Pakar Diagnosa Tumbuh Kembang Dengan Metode <i>Forward Chaining</i> Berbasis <i>Website</i></h3>
+                <h3 class="mb-0">Sistem Pakar Diagnosa Tumbuh Kembang Dengan Metode <i>Forward Chaining</i> Berbasis <i>Website</i> Di Puskesmas Sekardangan</h3>
             </div>
         </div>
             <div class="container-fluid justify-content-end align-items-middle" hidden>

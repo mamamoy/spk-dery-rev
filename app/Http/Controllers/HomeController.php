@@ -18,7 +18,7 @@ class HomeController extends Controller
        
         $data = [
             'title' => 'SIPATUBA',
-            'subtitle' => 'Sistem Pakar Tumbuh Kembang Balita Dengan Metode Forward Chaining Berbasis Website',
+            'subtitle' => 'Sistem Pakar Tumbuh Kembang Balita Dengan Metode Forward Chaining Berbasis Website Di Puskesmas Sekardangan',
         ];
         return view('home', $data);
     }
