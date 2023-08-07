@@ -31,7 +31,7 @@
                         Tambah Data
                     </button>
                 </div>
-                
+
                 <div class="modal fade text-left modal-borderless" id="border-less" tabindex="-1"
                     aria-labelledby="myModalLabel1" style="display: none;" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -57,42 +57,46 @@
                                         <label for="kode" class="col-sm-2 col-form-label">Kode</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="kode" name="kode"
-                                            placeholder="Kode Tumbuh Kembang" value="{{ old('kode') }}">
+                                                placeholder="Kode Tumbuh Kembang" value="{{ old('kode') }}">
                                             @error('kode')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="nama_penyakit" class="col-sm-2 col-form-label">Nama</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="nama_penyakit"
-                                                    name="nama_penyakit" value="{{ old('nama_penyakit') }}"
-                                                    placeholder="Nama Tumbuh Kembang">
-                                                @error('nama_penyakit')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                                name="nama_penyakit" value="{{ old('nama_penyakit') }}"
+                                                placeholder="Nama Tumbuh Kembang">
+                                            @error('nama_penyakit')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="definisi" class="col-sm-2 col-form-label">Definisi<span class="fw-lighter text-muted" style="font-size: 0.8em">Optional</span></label>
+                                        <label for="definisi" class="col-sm-2 col-form-label">Definisi<span
+                                                class="fw-lighter text-muted"
+                                                style="font-size: 0.8em">Optional</span></label>
                                         <div class="col-sm-10">
                                             <input class="form-control" id="definisi" name="definisi"
-                                                    value="{{ old('definisi') }}" placeholder="Deskripsi Definisi"
-                                                    style="height: 100px">
-                                                @error('definisi')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                                value="{{ old('definisi') }}" placeholder="Deskripsi Definisi"
+                                                style="height: 100px">
+                                            @error('definisi')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="solusi" class="col-sm-2 col-form-label">Solusi <span class="fw-lighter text-muted" style="font-size: 0.8em">Optional</span></label>
+                                        <label for="solusi" class="col-sm-2 col-form-label">Solusi <span
+                                                class="fw-lighter text-muted"
+                                                style="font-size: 0.8em">Optional</span></label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="solusi" name="solusi"
-                                                    value="{{ old('solusi') }}" placeholder="Solusi">
-                                                @error('solusi')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                                value="{{ old('solusi') }}" placeholder="Solusi">
+                                            @error('solusi')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                             </div>
@@ -101,7 +105,8 @@
                                     <i class="bx bx-x d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Tutup</span>
                                 </button>
-                                <button id="success" type="submit" class="btn btn-primary ml-1" data-bs-dismiss="modal">
+                                <button id="success" type="submit" class="btn btn-primary ml-1"
+                                    data-bs-dismiss="modal">
                                     <i class="bx bx-check d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Simpan</span>
                                 </button>
@@ -125,10 +130,11 @@
                             @foreach ($isi as $item)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ $item->kode}}</td>
+                                    <td class="text-center">{{ $item->kode }}</td>
                                     <td class="text-center">{{ $item->definisi }}</td>
                                     <td class="text-center">{{ $item->solusi }}</td>
-                                    <td class="d-flex justify-content-around align-items-center" style="height: 199.117px">
+                                    <td class="d-flex justify-content-around align-items-center"
+                                        style="height: 199.117px">
                                         <dl class="dt ma0 pa0 text-center">
                                             <dt class="the-icon">
                                                 <a href="/tumbuh-kembang/{{ $item->id }}/edit" class="btn btn-sm">
@@ -140,7 +146,8 @@
                                         </dl>
                                         <dl class="dt ma0 pa0 text-center">
                                             <dt class="the-icon">
-                                                <form method="POST" action="{{ route('tumbuh-kembang.destroy', $item->id) }}">
+                                                <form method="POST"
+                                                    action="{{ route('tumbuh-kembang.destroy', $item->id) }}">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-sm">
@@ -163,7 +170,7 @@
     </div>
 @endsection
 @push('scripts')
-<script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session()->has('success'))
         <script>
             Swal.fire({
@@ -172,16 +179,13 @@
                 text: '{{ session('success') }}',
             })
         </script>
-    @elseif (session()->has('error'))
+    @elseif ($errors->any())
         <script>
             Swal.fire({
                 icon: 'error',
                 title: 'Gagal',
-                text: '{{ session('error') }}',
+                text: 'Data gagal disimpan!',
             })
         </script>
     @endif
-
-
 @endpush
-

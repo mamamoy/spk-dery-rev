@@ -2,7 +2,6 @@
 
 @section('title')
     <title>{{ $title }} | SPDTK</title>
-    
 @endsection
 
 @section('content')
@@ -66,7 +65,8 @@
                                     </div>
                                     <div class="mb-3 mt-3">
                                         <p>Nama Gejala</p>
-                                        <select class="choices form-select multiple-remove" name="relasi_gejala[]" multiple="multiple">
+                                        <select class="choices form-select multiple-remove" name="relasi_gejala[]"
+                                            multiple="multiple">
                                             <option value="">Pilih Gejala</option>
                                             @foreach ($gejala as $g)
                                                 <option value="{{ $g->id }}">
@@ -105,7 +105,8 @@
                             @foreach ($data as $key => $d)
                                 <tr>
                                     <td class="text-center">{{ $key + 1 }}</td>
-                                    <td class="text-center" style="width: 300px">{{ $d['kode'] }} - {{ $d['nama_penyakit'] }}</td>
+                                    <td class="text-center" style="width: 300px">{{ $d['kode'] }} -
+                                        {{ $d['nama_penyakit'] }}</td>
                                     <td class="">
                                         {{-- @foreach ($d['gejala'] as $g)
                                             {{$g}} ,
@@ -148,13 +149,20 @@
 @endsection
 
 @push('scripts')
-    <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js "></script>
     @if (session()->has('success'))
         <script>
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
-                text: 'Data anda berhasil disimpan',
+                text: '{{ session('success') }}',
+            })
+        </script>
+    @elseif ($errors->any())
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Data gagal disimpan!',
             })
         </script>
     @endif

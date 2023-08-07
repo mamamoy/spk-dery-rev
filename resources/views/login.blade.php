@@ -28,8 +28,8 @@
                     @csrf
                     <div class="card">
                         <div class="card-header d-flex">
-                            <div class="avatar avatar-lg bg-warning me-3">
-                                <img src="{{ asset('dist/assets/images/logo/1.jpg') }}" alt="" srcset="">
+                            <div class="avatar avatar-lg me-3">
+                                <img src="{{ asset('dist/assets/images/logo/logo.png') }}" alt="" srcset="" style="scale: 90%">
                             </div>
                             <div class="mt-2">
                                 <h5>{{$subtitle}}</h5>

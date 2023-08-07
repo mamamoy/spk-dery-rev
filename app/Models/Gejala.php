@@ -9,7 +9,7 @@ class Gejala extends Model
 {
     use HasFactory;
     protected $table = 'gejalas';
-    protected $fillable = ['kode_gejala', 'nama_gejala'];
+    protected $fillable = ['kode_gejala', 'nama_gejala', 'penting'];
 
     public function penyakit()
     {

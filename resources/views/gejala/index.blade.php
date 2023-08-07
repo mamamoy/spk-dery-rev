@@ -2,7 +2,6 @@
 
 @section('title')
     <title>{{ $title }} | SPDTK</title>
-    
 @endsection
 
 @section('content')
@@ -25,7 +24,11 @@
         </div>
         <section class="section">
             <div class="card">
-
+                @if (session('danger'))
+                    <div class="alert alert-danger">
+                        {{ session('danger') }}
+                    </div>
+                @endif
                 <div class="mt-4 ms-4">
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                         data-bs-target="#border-less">
@@ -73,13 +76,39 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="mb-3 row">
+                                        <label for="gejala_penting" class="col-sm-2 col-form-label">Gejala Penting</label>
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gejala_penting"
+                                                    name="gejala_penting" value="1"
+                                                    {{ old('gejala_penting') ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="gejala_penting">
+                                                    Ya
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gejala_penting"
+                                                    name="gejala_penting" value="0"
+                                                    {{ old('gejala_penting') === '0' ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="gejala_penting">
+                                                    Tidak
+                                                </label>
+                                            </div>
+                                            @error('gejala_penting')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
                                     <i class="bx bx-x d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Tutup</span>
                                 </button>
-                                <button id="success" type="submit" class="btn btn-primary ml-1" data-bs-dismiss="modal">
+                                <button id="success" type="submit" class="btn btn-primary ml-1"
+                                    data-bs-dismiss="modal">
                                     <i class="bx bx-check d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Simpan</span>
                                 </button>
@@ -140,7 +169,7 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.8/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session()->has('success'))
         <script>
             Swal.fire({
@@ -149,12 +178,12 @@
                 text: '{{ session('success') }}',
             })
         </script>
-    @elseif (session()->has('error'))
+    @elseif ($errors->any())
         <script>
             Swal.fire({
                 icon: 'error',
                 title: 'Gagal',
-                text: '{{ session('error') }}',
+                text: 'Data gagal disimpan!',
             })
         </script>
     @endif

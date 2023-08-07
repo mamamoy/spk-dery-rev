@@ -56,7 +56,7 @@ class LoginController extends Controller
             // $role = $credentials['role'];
             // $request->session()->put('role', $role);
 
-            return redirect()->intended('dashboard');
+            return redirect()->intended('dashboard')->with('success', 'Berhasil login!');
         }
 
         return back()->with('loginError', 'Login failed!');
@@ -69,7 +69,7 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Berhasil logout!');
     }
 
     /**

@@ -57,6 +57,7 @@ class GejalaController extends Controller
         $this->validate($request, [
             'kode_gejala' => 'required|string|unique:gejalas,kode_gejala',
             'nama_gejala' => 'required|string',
+            'gejala_penting' => 'required',
         ], [
             'kode_gejala.unique' => 'Kode gejala sudah digunakan!',
         ]);
@@ -64,15 +65,16 @@ class GejalaController extends Controller
         $gejala = Gejala::create([
             'kode_gejala' => $request->kode_gejala,
             'nama_gejala' => $request->nama_gejala,
+            'penting' => $request->gejala_penting,
         ]);
 
 
         if ($gejala) {
-            //redirect dengan pesan sukses
+            // Data stored successfully
             return redirect()->route('gejala.index')->with('success', 'Data Berhasil Disimpan!');
         } else {
-            //redirect dengan pesan error
-            return redirect()->route('gejala.create')->with('error', 'Data Gagal Disimpan!');
+            // Data storage failed
+            return redirect()->route('gejala.index')->with('danger', 'Data Gagal Disimpan!');
         }
     }
 

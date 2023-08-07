@@ -121,7 +121,7 @@
 @endsection
 
 @push('scripts')
-    <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js "></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session()->has('success'))
         <script>
             Swal.fire({
@@ -129,14 +129,18 @@
                 title: 'Berhasil',
                 text: '{{ session('success') }}',
             })
+
         </script>
-    @elseif (session()->has('error'))
+    @elseif ($errors->any())
         <script>
             Swal.fire({
                 icon: 'error',
                 title: 'Gagal',
                 text: '{{ session('error') }}',
             })
+
         </script>
     @endif
+
+
 @endpush

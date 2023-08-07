@@ -27,7 +27,7 @@
 
 
 
-                {{-- <div class="mt-4 ms-4 justify-content-end me-4 d-flex gap-4">
+                <div class="mt-4 ms-4 justify-content-end me-4 d-flex gap-4">
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                         data-bs-target="#border-less">
                         Tambah Node
@@ -37,7 +37,7 @@
                         data-bs-target="#exampleModalCenter">
                         Hapus Node
                     </button>
-                </div> --}}
+                </div>
                 <!-- Vertically Centered modal Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -45,7 +45,7 @@
                         role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">Pilih Node
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Pilih node yang akan dihapus
                                 </h5>
                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                     <i data-feather="x"></i>
@@ -60,9 +60,10 @@
                                         <select class="form-select" id="basicSelect"
                                             onchange="updateDeleteFormAction(this)">
                                             @foreach ($node as $item)
-                                                <option value="{{ $item->id }}">{{ $item->text }}</option>
+                                                <option value="{{ $item->id }}" @if ($item->id === 1) disabled @endif>{{ $item->text }}</option>
                                             @endforeach
                                         </select>
+                                        <span><i class="text-danger">root (S) tidak dapat dihapus*</i></span>
                                     </fieldset>
                                 </div>
                                 <div class="modal-footer">
@@ -274,13 +275,21 @@
 
         window.addEventListener('DOMContentLoaded', init);
     </script>
-    <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session()->has('success'))
         <script>
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
                 text: '{{ session('success') }}',
+            })
+        </script>
+    @elseif ($errors->any())
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Data gagal disimpan!',
             })
         </script>
     @endif

@@ -38,7 +38,7 @@ Route::get('daftar-penyakit', [TKController::class, 'daftar']);
 Route::get('tentang', [HomeController::class, 'tentang'])->name('home.tentang');
 
 
-Route::group(['middleware' => ['add.user.data']], function () {
+Route::middleware(['add.user.data'])->group(function () {
     Route::resource('/dashboard', DashboardController::class)->middleware('auth');
     Route::resource('relasi', RelasiController::class)->middleware('admin');
     

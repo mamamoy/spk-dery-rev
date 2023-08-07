@@ -86,3 +86,23 @@
         </section>
     </div>
 @endsection
+
+@push('scripts')
+    @if (session()->has('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+            })
+        </script>
+    @elseif ($errors->any())
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Data gagal disimpan!',
+            })
+        </script>
+    @endif
+@endpush

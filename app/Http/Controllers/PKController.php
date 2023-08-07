@@ -134,10 +134,17 @@ class PKController extends Controller
      */
     public function destroy($id)
     {
-        $node = Node::find($id);
+        // Temukan node berdasarkan ID
+        $node = Node::findOrFail($id);
 
+        // Cek apakah node dengan id 1 (root)
+        if ($node->id == 1) {
+            return redirect()->back()->with('error', 'Node root tidak dapat dihapus.');
+        }
+
+        // Hapus node
         $node->delete();
 
-        return redirect()->route('pohon-keputusan.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->back()->with('success', 'Node berhasil dihapus.');
     }
 }

@@ -84,9 +84,9 @@
                                     <div class="card-body px-0 py-1">
                                         <ul class="widget-todo-list-wrapper" id="widget-todo-list">
                                             <div class="row">
-                                                
+
                                                 @foreach ($isi as $gejala)
-                                                <div class="col-6">
+                                                    <div class="col-6">
                                                         <li class="widget-todo-item">
                                                             <div
                                                                 class="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-50">
@@ -106,7 +106,7 @@
                                                             </div>
                                                         </li>
                                                     </div>
-                                                    @endforeach
+                                                @endforeach
                                             </div>
                                         </ul>
                                     </div>
@@ -131,15 +131,23 @@
 @endsection
 
 @push('scripts')
-    <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js "></script>
     <script src="{{ asset('dist/assets/extensions/dragula/dragula.min.js') }}"></script>
     <script src="{{ asset('dist/assets/js/pages/ui-todolist.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session()->has('success'))
         <script>
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
-                text: 'Data anda berhasil disimpan',
+                text: '{{ session('success') }}',
+            })
+        </script>
+    @elseif ($errors->any())
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Data gagal disimpan!',
             })
         </script>
     @endif
