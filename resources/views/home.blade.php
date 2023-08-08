@@ -19,7 +19,7 @@
                         <div class="card">
                             <div class="row">
                                 <div class="d-flex align-items-center justify-content-around">
-                                    <img src="{{ asset('dist/assets/images/itats.png') }}" alt="ITATS" style="height:300px">
+                                    <img src="{{ asset('dist/assets/images/sekardangan.png') }}" alt="ITATS" style="height:300px">
 
                                 </div>
                             </div>

@@ -10,17 +10,17 @@
     <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/logo.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/logo.png') }}" type="image/png">
 
-    <link rel="stylesheet" href="{{asset('dist/assets/css/main/app.css')}}">
-    <link rel="stylesheet" href="{{asset('dist/assets/css/main/app-dark.css')}}">
-    <link rel="stylesheet" href="{{asset('dist/assets/extensions/choices.js/public/assets/styles/choices.css')}}">
+    <link rel="stylesheet" href="{{ asset('dist/assets/css/main/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/assets/css/main/app-dark.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/assets/extensions/choices.js/public/assets/styles/choices.css') }}">
 
-    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/logo.png')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/logo.png')}}" type="image/png">
-    <link rel="stylesheet" href="{{asset('dist/assets/css/shared/iconly.css')}}">
-    <link rel="stylesheet" href="{{asset('dist/assets/css/pages/fontawesome.css')}}">
+    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/logo.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ asset('dist/assets/css/shared/iconly.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/assets/css/pages/fontawesome.css') }}">
 
     <link rel="stylesheet" href="{{ asset('dist/assets/css/shared/iconly.css') }}">
-    
+
     <style>
 
     </style>
@@ -33,15 +33,22 @@
             <header class="mb-5">
                 <div class="header-top">
                     <div class="container">
+
                         <div class="d-flex align-items-center gap-2">
+                            @auth
+                            <img src="{{ asset('dist/assets/images/logo/logo.png') }}" class="rounded float-start"
+                                alt="..." style="max-width: 4%">
+                            <a href="{{route('dashboard.index')}}"><span class="fw-bold fs-4">SIPATUBA</span></a>
+                            @else
                             <img src="{{ asset('dist/assets/images/logo/logo.png') }}" class="rounded float-start"
                                 alt="..." style="max-width: 4%">
                             <span class="fw-bold fs-4">SIPATUBA</span>
+                            @endauth
                             <nav class="main-navbar ms-5">
                                 <div class="container">
                                     <ul>
                                         <li class="menu-item">
-                                            <a href="{{route('index')}}" class='menu-link'>
+                                            <a href="{{ route('index') }}" class='menu-link'>
 
                                                 <span class="fw-bold">Beranda</span>
                                             </a>
@@ -56,20 +63,18 @@
 
                                                     <ul class="submenu-group">
                                                         <li class="submenu-item  ">
-                                                            <a href="/daftar-gejala"
-                                                                class='submenu-link'>Gejala</a>
+                                                            <a href="/daftar-gejala" class='submenu-link'>Gejala</a>
                                                         </li>
 
                                                         <li class="submenu-item  ">
-                                                            <a href="/daftar-penyakit"
-                                                                class='submenu-link'>Penyakit</a>
+                                                            <a href="/daftar-penyakit" class='submenu-link'>Penyakit</a>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="{{route('home.tentang')}}" class='menu-link'>
+                                            <a href="{{ route('home.tentang') }}" class='menu-link'>
                                                 <span class="fw-bold">Tentang</span>
                                             </a>
                                         </li>
@@ -84,23 +89,23 @@
                                     <a href="/keluar" type="button" class="btn btn-primary">Logout</a>
                                 </li>
                             </ul>
-                            @else
-                        <div class="header-top-right">
+                        @else
+                            <div class="header-top-right">
 
-                            <div>
-                                <a class="fw-bold" href="{{ route('daftar.index') }}">Pendaftaran</a>
+                                <div>
+                                    <a class="fw-bold" href="{{ route('daftar.index') }}">Pendaftaran</a>
+                                </div>
+
+                                <a href="{{ route('masuk.index') }}" class="btn btn-sm btn-primary">Masuk</a>
+
                             </div>
-
-                            <a href="{{route('masuk.index')}}" class="btn btn-sm btn-primary">Masuk</a>
-
-                        </div>
                         @endauth
                     </div>
                 </div>
             </header>
         </div>
         <div id="app">
-        @yield('content')
+            @yield('content')
         </div>
         <footer>
             <div class="container">

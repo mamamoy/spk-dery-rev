@@ -26,32 +26,28 @@
             <div class="card">
 
                 <div class="mt-4 ms-4">
+
+                    <!-- Button trigger for scrollbar modal -->
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                        data-bs-target="#border-less">
+                        data-bs-target="#exampleModalLong">
                         Tambah Data
                     </button>
                 </div>
-                <div class="modal fade text-left modal-borderless" id="border-less" tabindex="-1"
-                    aria-labelledby="myModalLabel1" style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Tambah Relasi</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <i data-feather="x"></i>
+                                </button>
+                            </div>
                             <form action="{{ route('relasi.store') }}" method="POST">
                                 @csrf
-                                <div class="modal-header justify-content-end">
-                                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
-                                        aria-label="Tutup">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div>
-                                    <h5 class="modal-title text-center">Input Relasi</h5>
-                                </div>
-                                <div class="modal-body" style="height: 500px">
+                                <div class="modal-body">
+
                                     <div class="mb-3 mt-3">
                                         <p>Nama Tumbuh Kembang</p>
                                         <select class="choices form-select" name="relasi_penyakit">
@@ -75,6 +71,7 @@
                                             @endforeach
                                         </select>
                                     </div>
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
