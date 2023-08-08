@@ -96,7 +96,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Gagal',
-                text: '{{ session('error') }}',
+                text: 'Data gagal disimpan!',
             })
 
         </script>

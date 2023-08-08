@@ -17,6 +17,6 @@ class Gejala extends Model
     }
     public function relasi()
     {
-        return $this->hasMany(Relasi::class, 'gejala_id');
+        return $this->belongsToMany(Relasi::class, 'relasis','gejala_id', 'id');
     }
 }

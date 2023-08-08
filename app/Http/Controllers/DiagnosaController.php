@@ -125,13 +125,8 @@ class DiagnosaController extends Controller
 
         // dd($data);
 
-        if ($diagnosa) {
-            //redirect dengan pesan sukses
-            return view('diagnosa/hasil', $data)->with(['success' => 'Data Berhasil Disimpan!']);
-        } else {
-            //redirect dengan pesan error
-            return redirect()->route('diagnosa.index')->with(['error' => 'Data Gagal Disimpan!']);
-        }
+        return view('diagnosa/hasil', $data)->with('success', 'Penyakit berhasil ditemukan!');
+        
     }
 
 
@@ -172,7 +167,7 @@ class DiagnosaController extends Controller
 
         if ($diagnosa) {
             //redirect dengan pesan sukses
-            return redirect()->route('diagnosa.showDiagnosa')->with(['success' => 'Data Berhasil Disimpan!']);
+            return redirect()->route('diagnosa.showDiagnosa')->with('success', 'Data Berhasil Disimpan!');
         } else {
             //redirect dengan pesan error
             return redirect()->route('diagnosa.index')->with(['error' => 'Data Gagal Disimpan!']);

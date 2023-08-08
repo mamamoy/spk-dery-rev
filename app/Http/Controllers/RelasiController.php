@@ -16,58 +16,58 @@ class RelasiController extends Controller
      */
     public function index()
     {
-//         $relasi = Relasi::all();
-// $data = [];
-// foreach($relasi as $r){
-//     $penyakit = TKModel::where('id', $r->penyakit_id)->first();
-//     $gejala = Gejala::where('id', $r->gejala_id)->first();
-//     $hasil[] = [
-//         'id' => $penyakit->id,
-//         'kode' => $penyakit->kode,
-//         'nama_penyakit' => $penyakit->nama_penyakit,
-//         'gejala_id' => $gejala->id,
-//         'nama_gejala' => $gejala->nama_gejala,
-//     ];
-// }
-// $data=[
-//     'title' => 'Basis Pengetahuan',
-//     'subtitle' => 'Halaman berisikan pengetahuan hubungan antara tumbuh kembang dan gejala',
-//     'data' => $hasil,
-//     'penyakit' => TKModel::all(),
-//     'gejala' => Gejala::all(),
-// ];
+        //         $relasi = Relasi::all();
+        // $data = [];
+        // foreach($relasi as $r){
+        //     $penyakit = TKModel::where('id', $r->penyakit_id)->first();
+        //     $gejala = Gejala::where('id', $r->gejala_id)->first();
+        //     $hasil[] = [
+        //         'id' => $penyakit->id,
+        //         'kode' => $penyakit->kode,
+        //         'nama_penyakit' => $penyakit->nama_penyakit,
+        //         'gejala_id' => $gejala->id,
+        //         'nama_gejala' => $gejala->nama_gejala,
+        //     ];
+        // }
+        // $data=[
+        //     'title' => 'Basis Pengetahuan',
+        //     'subtitle' => 'Halaman berisikan pengetahuan hubungan antara tumbuh kembang dan gejala',
+        //     'data' => $hasil,
+        //     'penyakit' => TKModel::all(),
+        //     'gejala' => Gejala::all(),
+        // ];
 
-$relasi = Relasi::all();
-$data = [];
-foreach($relasi as $r){
-    $penyakit = TKModel::where('id', $r->penyakit_id)->first();
-    $gejala = Gejala::where('id', $r->gejala_id)->first();
-    if(!isset($hasil[$penyakit->id])){
-        $hasil[$penyakit->id] = [
-            'id' => $penyakit->id,
-            'kode' => $penyakit->kode,
-            'nama_penyakit' => $penyakit->nama_penyakit,
-            'gejala' => [],
+        $relasi = Relasi::all();
+        $data = [];
+        foreach ($relasi as $r) {
+            $penyakit = TKModel::where('id', $r->penyakit_id)->first();
+            $gejala = Gejala::where('id', $r->gejala_id)->first();
+            if (!isset($hasil[$penyakit->id])) {
+                $hasil[$penyakit->id] = [
+                    'id' => $penyakit->id,
+                    'kode' => $penyakit->kode,
+                    'nama_penyakit' => $penyakit->nama_penyakit,
+                    'gejala' => [],
+                ];
+            }
+            $hasil[$penyakit->id]['gejala'][] = $gejala->nama_gejala;
+        }
+
+        $used_ids = Relasi::pluck('penyakit_id')->toArray();
+        $penyakits = TKModel::whereNotIn('id', $used_ids)->get();
+
+        if (empty($hasil)) {
+            $hasil = [];
+        }
+
+        $data = [
+            'title' => 'Basis Pengetahuan',
+            'subtitle' => 'Halaman berisikan pengetahuan hubungan antara tumbuh kembang dan gejala',
+            'data' => array_values($hasil),
+            'penyakit' => TKModel::all(),
+            'gejala' => Gejala::all(),
+            'daftar' => $penyakits,
         ];
-    }
-    $hasil[$penyakit->id]['gejala'][] = $gejala->nama_gejala;
-}
-
-$used_ids = Relasi::pluck('penyakit_id')->toArray();
-$penyakits = TKModel::whereNotIn('id', $used_ids)->get();
-
-if(empty($hasil)){
-    $hasil = [];
-    }
-
-$data=[
-    'title' => 'Basis Pengetahuan',
-    'subtitle' => 'Halaman berisikan pengetahuan hubungan antara tumbuh kembang dan gejala',
-    'data' => array_values($hasil),
-    'penyakit' => TKModel::all(),
-    'gejala' => Gejala::all(),
-    'daftar' => $penyakits,
-];
         // dd($data);
         return view('relasi.index', $data);
     }
@@ -108,7 +108,7 @@ $data=[
 
         if ($relasi) {
             //redirect dengan pesan sukses
-            return redirect()->route('relasi.index')->with(['success' => 'Data Berhasil Disimpan!']);
+            return redirect()->route('relasi.index')->with('success', 'Data Berhasil Disimpan!');
         } else {
             //redirect dengan pesan error
             return redirect()->route('relasi.index')->with(['error' => 'Data Gagal Disimpan!']);
@@ -134,31 +134,28 @@ $data=[
      */
     public function edit($id)
     {
-    // mengambil data relasi berdasarkan penyakit_id
-    $relasi = Relasi::find($id);
-        $relasiID = Relasi::all();
-    // mengambil data penyakit berdasarkan id
-    $penyakit = TKModel::find($relasi->penyakit_id);
-    // mengambil seluruh data gejala
-    $gejala = Gejala::all();
-    // menampung id gejala yang terpilih
-    $r = Relasi::where('penyakit_id', $penyakit->id)->first();
-    $hasil = $r ? $r->pluck('id')->toArray() : [];
+        // mengambil data relasi berdasarkan penyakit_id
+        $relasi = Relasi::where('penyakit_id', $id)->get();
+        $gejalaIDs = $relasi->pluck('gejala_id')->toArray(); // Mengambil semua gejala_id yang terkait
 
-    $data = [
-        'title' => 'Edit Basis Pengetahuan',
-        'subtitle' => 'Data Basis Pengetahuan',
-        'penyakit' =>$penyakit,
-        'gejala' => $gejala,
-        'relasi' => $relasi,
-        'hasil' => $hasil,
-        'id' => $id,
-        'all' => TKModel::all(),
-    ];
+        $penyakit = TKModel::all();
+        $penyakitID = TKModel::find($id);
 
-    // dd($data);
-    return view('relasi.edit', $data);
+        $gejala = Gejala::all();
 
+
+        $data = [
+            'title' => 'Edit Basis Pengetahuan',
+            'subtitle' => 'Data Basis Pengetahuan',
+            'penyakit' => $penyakit,
+            'penyakitId' => $penyakitID->id,
+            'gejala' => $gejala,
+            'relasi' => $relasi,
+            'gejalaIDs' => $gejalaIDs,
+        ];
+
+        // dd($data);
+        return view('relasi.edit', $data);
     }
 
     /**
@@ -171,32 +168,52 @@ $data=[
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'relasi_penyakit' => 'required|string',
-            'relasi_gejala' => 'required|string',
+            'relasi_penyakit' => 'required|integer',
+            'relasi_gejala' => 'required|array',
         ]);
-        
+
         $penyakit_id = $request->relasi_penyakit;
-        $gejala_id = $request->relasi_gejala;
-        
-        $relasi = Relasi::all()->where('penyakit_id', $request->id);
+        $gejala_ids = $request->relasi_gejala;
 
-        foreach($gejala_id as $g){
-            $relasi->update([
-                'penyakit_id' => $penyakit_id,
-                'gejala_id' => $g
-            ]);
+        $relasi = Relasi::findOrFail($id); // Fetch the existing relationship by ID
+
+        // Update the relationship's penyakit_id
+        $relasi->penyakit_id = $penyakit_id;
+        $relasi->save();
+
+        // Get the current gejala_ids associated with the relationship
+        $current_gejala_ids = Relasi::where('penyakit_id', $id)->pluck('gejala_id')->toArray();
+        // dd($current_gejala_ids);
+
+        // Loop through provided gejala_ids and update the relationship
+        foreach ($gejala_ids as $gejala_id) {
+            // If the current gejala_id is already associated, skip
+            if (in_array($gejala_id, $current_gejala_ids)) {
+                continue;
+            }
+
+            // If the gejala_id is not associated, create a new Relasi row
+            $newRelasi = new Relasi();
+            $newRelasi->gejala_id = $gejala_id;
+            $newRelasi->penyakit_id = $penyakit_id;
+            $newRelasi->save();
         }
 
-
-        if ($relasi) {
-            //redirect dengan pesan sukses
-
-            return redirect()->route('relasi.index')->with(['success' => 'Data Berhasil Disimpan!']);
-        } else {
-            //redirect dengan pesan error
-            return redirect()->route('relasi.edit')->with(['error' => 'Data Gagal Disimpan!']);
+        // Remove gejala_ids that are no longer selected
+        foreach ($current_gejala_ids as $current_gejala_id) {
+            if (!in_array($current_gejala_id, $gejala_ids)) {
+                // Delete the corresponding Relasi row
+                Relasi::where('gejala_id', $current_gejala_id)->where('penyakit_id', $penyakit_id)->delete();
+            }
         }
+
+        return redirect()->route('relasi.index')->with('success', 'Data Berhasil Disimpan!');
     }
+
+
+
+
+
 
     /**
      * Remove the specified resource from storage.

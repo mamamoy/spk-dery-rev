@@ -122,12 +122,12 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if (session()->has('success'))
+    @if (session())
         <script>
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
-                text: '{{ session('success') }}',
+                text: 'Gangguan tumbuh kembang ditemukan!',
             })
 
         </script>

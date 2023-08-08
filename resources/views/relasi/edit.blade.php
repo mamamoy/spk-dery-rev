@@ -34,7 +34,7 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form class="form" action="{{ route('relasi.update', $relasi->id) }}" method="POST">
+                                <form class="form" action="{{ route('relasi.update', $penyakitId) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
@@ -42,11 +42,12 @@
                                             <p>Nama Tumbuh Kembang</p>
                                         </div>
                                         <div class="col-md-8 mb-4">
-                                            <select class="form-select" name="relasi_penyakit" >
-                                                <option value="{{ $penyakit->id }}" {{ $penyakit->id ? 'selected' : '' }}>
-                                                    {{ $penyakit->kode }} - {{ $penyakit->nama_penyakit }}</option>
-                                                @foreach ($all as $p)
-                                                    <option value="{{ $p->id }}">
+                                            <select class="form-select" name="relasi_penyakit">
+                                                {{-- <option value="{{ $penyakit->id }}" {{ $penyakit->id ? 'selected' : '' }}>
+                                                    {{ $penyakit->kode }} - {{ $penyakit->nama_penyakit }}</option> --}}
+                                                @foreach ($penyakit as $p)
+                                                    <option value="{{ $p->id }}"
+                                                        {{ $p->id == $penyakitId ? 'selected' : '' }}>
                                                         {{ $p->kode }} - {{ $p->nama_penyakit }}
                                                     </option>
                                                 @endforeach
@@ -56,11 +57,12 @@
                                             <label for="kode" class="col-sm-2 col-form-label">Gejala</label>
                                         </div>
                                         <div class="col-md-8 mb-4">
-                                            <select class="choices form-select multiple-remove" name="relasi_gejala[]" multiple="multiple">
+                                            <select class="choices form-select multiple-remove" name="relasi_gejala[]"
+                                                multiple="multiple">
                                                 <option value="">Pilih Gejala</option>
                                                 @foreach ($gejala as $g)
-
-                                                    <option value="{{ $g->id }}" {{ in_array($g->id, $hasil ?? []) ? 'selected' : '' }}>
+                                                    <option value="{{ $g->id }}"
+                                                        {{ in_array($g->id, $gejalaIDs) ? 'selected' : '' }}>
                                                         {{ $g->kode_gejala }} - {{ $g->nama_gejala }}
                                                     </option>
                                                 @endforeach
@@ -70,7 +72,7 @@
                                             @enderror
                                         </div>
 
-                                        <input type="hidden" name="id" id="id" value="{{ $relasi->id }}">
+                                        <input type="hidden" name="id" id="id" value="{{ $penyakitId }}">
 
                                         <div class="col-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
@@ -88,6 +90,7 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session()->has('success'))
         <script>
             Swal.fire({

@@ -15,11 +15,11 @@ class Relasi extends Model
 
     public function dataPenyakit()
     {
-        return $this->belongsTo(TKModel::class);
+        return $this->belongsTo(TKModel::class, 'relasis', 'id', 'penyakit_id');
     }
     public function dataGejala()
     {
-        return $this->hasMany(Gejala::class, 'id');
+        return $this->belongsToMany(Gejala::class,'relasis', 'id', 'gejala_id',);
     }
 
     public function penyakit()
@@ -28,6 +28,6 @@ class Relasi extends Model
     }
     public function gejala()
     {
-        return $this->belongsTo(Gejala::class);
+        return $this->belongsTo(Gejala::class, 'gejala_id');
     }
 }
