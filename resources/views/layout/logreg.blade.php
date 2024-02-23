@@ -7,15 +7,15 @@
     @yield('title')
 
     <link rel="stylesheet" href="{{ asset('dist/assets/css/main/app.css') }}">
-    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/logo.png') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/logo.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo4.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo4.png') }}" type="image/png">
 
     <link rel="stylesheet" href="{{ asset('dist/assets/css/main/app.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/assets/css/main/app-dark.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/assets/extensions/choices.js/public/assets/styles/choices.css') }}">
 
-    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/logo.png') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo/logo.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo4.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('dist/assets/images/logo4.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ asset('dist/assets/css/shared/iconly.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/assets/css/pages/fontawesome.css') }}">
 
@@ -36,11 +36,11 @@
 
                         <div class="d-flex align-items-center gap-2">
                             @auth
-                            <img src="{{ asset('dist/assets/images/logo/logo.png') }}" class="rounded float-start"
+                            <img src="{{ asset('dist/assets/images/logo4.png') }}" class="rounded float-start"
                                 alt="..." style="max-width: 4%">
                             <a href="{{route('dashboard.index')}}"><span class="fw-bold fs-4">SIPATUBA</span></a>
                             @else
-                            <img src="{{ asset('dist/assets/images/logo/logo.png') }}" class="rounded float-start"
+                            <img src="{{ asset('dist/assets/images/logo4.png') }}" class="rounded float-start"
                                 alt="..." style="max-width: 4%">
                             <span class="fw-bold fs-4">SIPATUBA</span>
                             @endauth
@@ -114,7 +114,7 @@
                         <p>2023 &copy; SIPATUBA</p>
                     </div>
                     <div class="float-end">
-                        <p>Crafted by Dery Apriliano Putra</p>
+                        <p>Crafted by Codingkeun Team</p>
                     </div>
                 </div>
             </div>

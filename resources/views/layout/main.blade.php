@@ -11,8 +11,8 @@
     {{-- <link rel="stylesheet" href="{{asset('dist/assets/css/main/app-dark.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('dist/assets/extensions/choices.js/public/assets/styles/choices.css')}}">
 
-    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/logo.png')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo/logo.png')}}" type="image/png">
+    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo4.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('dist/assets/images/logo4.png')}}" type="image/png">
     <link rel="stylesheet" href="{{asset('dist/assets/css/shared/iconly.css')}}">
     <link rel="stylesheet" href="{{asset('dist/assets/css/pages/fontawesome.css')}}">
 <link rel="stylesheet" href="{{asset('dist/assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}">

@@ -5,7 +5,7 @@
                     <div class="user-menu d-flex align-self-center">
                         <div class="user-img d-flex align-items-center me-4">
                             <div class="avatar avatar-xl">
-                                <img style="height: 60px" src="{{asset('dist/assets/images/faces/1.jpg')}}">
+                                <img style="height: 60px" src="{{asset('dist/assets/images/logo4.png')}}">
                             </div>
                         </div>
                         <div class="user-name mt-2">

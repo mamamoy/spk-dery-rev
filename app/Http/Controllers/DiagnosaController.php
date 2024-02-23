@@ -89,9 +89,7 @@ class DiagnosaController extends Controller
         // Calculate the importance count of each symptom
         $gejala_importance = array_fill_keys($gejala_ids, 0);
         foreach ($gejala_ids as $gejala_id) {
-            
-            // Here, you can define the method to calculate the importance count
-            // For example, you might have a table to store the importance score of each symptom
+           
             // Replace 'importance' with the correct field name in your setup
             $gejala_importance[$gejala_id] = Gejala::find($gejala_id)->penting;
         }

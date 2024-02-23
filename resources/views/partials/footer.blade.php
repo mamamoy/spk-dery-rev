@@ -5,7 +5,7 @@
         </div>
         <div class="float-end">
             <p>Crafted with <span class="text-danger"></span>
-                by Dery Apriliano Putra</p>
+                by Codingkeun Team</p>
         </div>
     </div>
 </footer>

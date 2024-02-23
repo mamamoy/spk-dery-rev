@@ -18,8 +18,8 @@
                     <div class="col-12 col-lg-8">
                         <div class="card">
                             <div class="row">
-                                <div class="d-flex align-items-center justify-content-around">
-                                    <img src="{{ asset('dist/assets/images/sekardangan.png') }}" alt="ITATS" style="height:300px">
+                                <div class="d-flex align-items-center justify-content-around rounded-3">
+                                    <img src="{{ asset('dist/assets/images/logo4.png') }}" alt="CodingKeun" style="height:300px;">
 
                                 </div>
                             </div>
